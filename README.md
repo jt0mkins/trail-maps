@@ -9,6 +9,10 @@ A responsive static website for selling 3D printed trail maps of New Zealand's G
 - About us
 - Contact us
 
+## Cart
+
+The store page includes a browser-based cart that saves to local storage and keeps quantities while you browse.
+
 ## Deploy to GitHub Pages
 
 This project deploys by publishing the site files to the `gh-pages` branch with the workflow in `.github/workflows/deploy.yml`.
