@@ -13,6 +13,37 @@ A responsive static website for selling 3D printed trail maps of New Zealand's G
 
 The store page includes a browser-based cart that saves to local storage and keeps quantities while you browse.
 
+## Checkout
+
+The checkout button now posts the cart to a local endpoint at `/checkout`. If Stripe credentials are configured, the server creates a real Stripe Checkout session; otherwise, it returns a local fallback message so the storefront remains usable during development.
+
+Set these environment variables before launching the server:
+
+- `STRIPE_SECRET_KEY`
+- `STRIPE_SUCCESS_URL` (optional)
+- `STRIPE_CANCEL_URL` (optional)
+- `RESEND_API_KEY`
+- `RESEND_FROM` (optional)
+- `CONTACT_TO_EMAIL` (optional)
+
+You can place them in a local `.env` file in the project root. The server reads that file automatically when it starts.
+
+## Contact form email delivery
+
+The contact form now sends real email messages through Resend when the following environment variables are available:
+
+- `RESEND_API_KEY`
+- `RESEND_FROM`
+- `CONTACT_TO_EMAIL` (optional, defaults to hello@trailmapsnz.co.nz)
+
+To test locally, run:
+
+```bash
+C:/Python313/python.exe server.py
+```
+
+Then open http://127.0.0.1:8000/ in your browser.
+
 ## Deploy to GitHub Pages
 
 This project deploys by publishing the site files to the `gh-pages` branch with the workflow in `.github/workflows/deploy.yml`.

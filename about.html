@@ -29,6 +29,35 @@
           <a href="about.html" aria-current="page">About us</a>
           <a href="contact.html">Contact us</a>
         </nav>
+        <div class="header-cart">
+          <button
+            type="button"
+            class="header-cart-toggle"
+            id="header-cart-toggle"
+            aria-expanded="false"
+            aria-controls="header-cart-panel"
+          >
+            <span>Cart</span>
+            <span class="header-cart-badge" id="cart-count-badge">0</span>
+          </button>
+
+          <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
+            <div class="cart-panel-header">
+              <strong>Cart summary</strong>
+              <span id="cart-count-label">0 items</span>
+            </div>
+            <div id="cart-empty" class="cart-empty">Your cart is empty. Add a trail map to get started.</div>
+            <div id="cart-items" class="cart-items header-cart-items" hidden></div>
+            <div class="cart-totals header-cart-totals">
+              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
+              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
+            </div>
+            <div class="cart-actions">
+              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
+              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 

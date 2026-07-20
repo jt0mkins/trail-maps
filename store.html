@@ -29,6 +29,41 @@
           <a href="about.html">About us</a>
           <a href="contact.html">Contact us</a>
         </nav>
+        <div class="header-cart">
+          <button
+            type="button"
+            class="header-cart-toggle"
+            id="header-cart-toggle"
+            aria-expanded="false"
+            aria-controls="header-cart-panel"
+          >
+            <span>Cart</span>
+            <span class="header-cart-badge" id="cart-count-badge">0</span>
+          </button>
+
+          <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
+            <div class="cart-panel-header">
+              <strong>Cart summary</strong>
+              <span id="cart-count-label">0 items</span>
+            </div>
+
+            <div id="cart-empty" class="cart-empty">
+              Your cart is empty. Add a trail map to get started.
+            </div>
+
+            <div id="cart-items" class="cart-items header-cart-items" hidden></div>
+
+            <div class="cart-totals header-cart-totals">
+              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
+              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
+            </div>
+
+            <div class="cart-actions">
+              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
+              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -43,7 +78,7 @@
       </section>
 
       <section class="product-grid">
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="milford-track-relief.html" role="button" tabindex="0" aria-label="Open details for Milford Track Relief">
           <div class="product-image milford"></div>
           <div class="product-content">
             <h2>Milford Track Relief</h2>
@@ -51,7 +86,7 @@
             <div class="product-meta"><span>NZ$179</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="routeburn-track-relief.html" role="button" tabindex="0" aria-label="Open details for Routeburn Track Relief">
           <div class="product-image routeburn"></div>
           <div class="product-content">
             <h2>Routeburn Track Relief</h2>
@@ -59,7 +94,7 @@
             <div class="product-meta"><span>NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="abel-tasman-coast-track.html" role="button" tabindex="0" aria-label="Open details for Abel Tasman Coast Track">
           <div class="product-image abel"></div>
           <div class="product-content">
             <h2>Abel Tasman Coast Track</h2>
@@ -67,7 +102,7 @@
             <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="tongariro-alpine-crossing.html" role="button" tabindex="0" aria-label="Open details for Tongariro Alpine Crossing">
           <div class="product-image tongariro"></div>
           <div class="product-content">
             <h2>Tongariro Alpine Crossing</h2>
@@ -75,7 +110,7 @@
             <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="kepler-track.html" role="button" tabindex="0" aria-label="Open details for Kepler Track">
           <div class="product-image kepler"></div>
           <div class="product-content">
             <h2>Kepler Track</h2>
@@ -83,7 +118,7 @@
             <div class="product-meta"><span>NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="heaphy-track.html" role="button" tabindex="0" aria-label="Open details for Heaphy Track">
           <div class="product-image heaphy"></div>
           <div class="product-content">
             <h2>Heaphy Track</h2>
@@ -91,7 +126,7 @@
             <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="rakiura-track.html" role="button" tabindex="0" aria-label="Open details for Rakiura Track">
           <div class="product-image rangi"></div>
           <div class="product-content">
             <h2>Rakiura Track</h2>
@@ -99,7 +134,7 @@
             <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="paparoa-track.html" role="button" tabindex="0" aria-label="Open details for Paparoa Track">
           <div class="product-image paparoa"></div>
           <div class="product-content">
             <h2>Paparoa Track</h2>
@@ -107,7 +142,7 @@
             <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="whanganui-journey.html" role="button" tabindex="0" aria-label="Open details for Whanganui Journey">
           <div class="product-image whanganui"></div>
           <div class="product-content">
             <h2>Whanganui Journey</h2>
@@ -115,7 +150,7 @@
             <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
-        <article class="product-card reveal">
+        <article class="product-card reveal" data-product-page="great-walks-collection-set.html" role="button" tabindex="0" aria-label="Open details for Great Walks Collection Set">
           <div class="product-image route-alternates"></div>
           <div class="product-content">
             <h2>Great Walks Collection Set</h2>
@@ -125,40 +160,6 @@
         </article>
       </section>
 
-      <section class="cart-section reveal" aria-labelledby="cart-heading">
-        <div class="cart-shell">
-          <div class="cart-copy">
-            <p class="eyebrow">Cart</p>
-            <h2 id="cart-heading">Review your picks before checking out.</h2>
-            <p>
-              Add products from the store, update quantities, and keep the cart saved while you browse.
-            </p>
-          </div>
-
-          <aside class="cart-panel" aria-live="polite">
-            <div class="cart-panel-header">
-              <strong>Cart summary</strong>
-              <span id="cart-count">0 items</span>
-            </div>
-
-            <div id="cart-empty" class="cart-empty">
-              Your cart is empty. Add a trail map to get started.
-            </div>
-
-            <div id="cart-items" class="cart-items" hidden></div>
-
-            <div class="cart-totals">
-              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
-              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
-            </div>
-
-            <div class="cart-actions">
-              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
-              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
-            </div>
-          </aside>
-        </div>
-      </section>
     </main>
 
     <footer class="site-footer">

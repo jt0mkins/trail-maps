@@ -29,6 +29,35 @@
           <a href="about.html">About us</a>
           <a href="contact.html" aria-current="page">Contact us</a>
         </nav>
+        <div class="header-cart">
+          <button
+            type="button"
+            class="header-cart-toggle"
+            id="header-cart-toggle"
+            aria-expanded="false"
+            aria-controls="header-cart-panel"
+          >
+            <span>Cart</span>
+            <span class="header-cart-badge" id="cart-count-badge">0</span>
+          </button>
+
+          <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
+            <div class="cart-panel-header">
+              <strong>Cart summary</strong>
+              <span id="cart-count-label">0 items</span>
+            </div>
+            <div id="cart-empty" class="cart-empty">Your cart is empty. Add a trail map to get started.</div>
+            <div id="cart-items" class="cart-items header-cart-items" hidden></div>
+            <div class="cart-totals header-cart-totals">
+              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
+              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
+            </div>
+            <div class="cart-actions">
+              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
+              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -45,30 +74,30 @@
       <div class="contact-grid">
         <section class="contact-card reveal">
           <h2>Send a message</h2>
-          <form class="contact-form">
+          <form class="contact-form" id="contact-form">
             <label>
               Name
-              <input type="text" name="name" placeholder="Your name" />
+              <input type="text" name="name" placeholder="Your name" required />
             </label>
             <label>
               Email
-              <input type="email" name="email" placeholder="you@example.com" />
+              <input type="email" name="email" placeholder="you@example.com" required />
             </label>
             <label>
               Message
-              <textarea name="message" rows="6" placeholder="Tell us which Great Walk map you want"></textarea>
+              <textarea name="message" rows="6" placeholder="Tell us which Great Walk map you want" required></textarea>
             </label>
             <button type="submit" class="button button-primary">Send enquiry</button>
+            <p class="form-status" id="form-status" aria-live="polite"></p>
           </form>
         </section>
 
         <aside class="contact-card reveal">
           <h2>Other ways to reach us</h2>
           <div class="contact-details">
-            <p><strong>Email:</strong> hello@trailmapsnz.co.nz</p>
-            <p><strong>Phone:</strong> +64 21 555 019</p>
             <p><strong>Location:</strong> Wellington, New Zealand</p>
             <p><strong>Hours:</strong> Mon-Fri, 9am-5pm</p>
+            <p>Use the form to send your enquiry and we will get back to you shortly.</p>
           </div>
         </aside>
       </div>
@@ -80,5 +109,6 @@
         <a href="store.html">Shop now</a>
       </div>
     </footer>
+    <script src="contact.js"></script>
   </body>
 </html>
