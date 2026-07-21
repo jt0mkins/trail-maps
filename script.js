@@ -2,6 +2,10 @@
   const storageKey = "trail-maps-cart";
   const cartButtons = document.querySelectorAll("[data-cart-add]");
   const productCards = document.querySelectorAll(".product-card[data-product-page]");
+  const customGpxForm = document.querySelector("[data-custom-gpx-form]");
+  const customGpxFileInput = document.querySelector("[data-custom-gpx-file]");
+  const customRunTitleInput = document.querySelector("[data-custom-run-title]");
+  const customGpxPreview = document.querySelector("[data-custom-gpx-preview]");
   const header = document.querySelector(".site-header");
 
   if (header && !document.getElementById("header-cart-toggle")) {
@@ -88,6 +92,10 @@
     const title = container.querySelector("h1, h2")?.textContent?.trim();
     const product = products.find((p) => p.title === title);
     if (!product) return;
+
+    if (title === "Custom GPX Run" || container.querySelector("[data-custom-gpx-form]")) {
+      return;
+    }
 
     const sizes = product.sizes || (product.price ? { "8x10": product.price } : { "8x10": 0 });
 
@@ -182,12 +190,16 @@
       const title = titleElement?.textContent?.trim();
       const product = products.find((item) => item.title === title);
       let selectedSize = "8x10";
-      const sizeSelect = detailContainer?.querySelector(".size-selector");
-      if (sizeSelect) {
-        selectedSize = sizeSelect.value || selectedSize;
+      if (detailContainer?.matches("[data-custom-gpx-product]")) {
+        selectedSize = "Custom";
       } else {
-        const checked = detailContainer?.querySelector(".size-selector input[type='radio']:checked");
-        if (checked) selectedSize = checked.value;
+        const sizeSelect = detailContainer?.querySelector(".size-selector");
+        if (sizeSelect) {
+          selectedSize = sizeSelect.value || selectedSize;
+        } else {
+          const checked = detailContainer?.querySelector(".size-selector input[type='radio']:checked");
+          if (checked) selectedSize = checked.value;
+        }
       }
 
       if (!product) return;
@@ -196,6 +208,44 @@
       addItem(product.title, selectedSize, unitPrice);
     });
   });
+
+  if (customGpxForm && customGpxFileInput && customRunTitleInput && customGpxPreview) {
+    const updateCustomGpxPreview = () => {
+      const file = customGpxFileInput.files?.[0];
+      const title = customRunTitleInput.value.trim();
+
+      if (!file && !title) {
+        customGpxPreview.textContent = "Choose a GPX file to preview it here.";
+        return;
+      }
+
+      const fileLabel = file ? `Uploaded file: ${file.name}` : "No file selected yet.";
+      const titleLabel = title ? `Run title: ${title}` : "Add a run title to personalise the order.";
+      customGpxPreview.innerHTML = `<strong>Custom route ready</strong><br />${fileLabel}<br />${titleLabel}`;
+    };
+
+    customGpxFileInput.addEventListener("change", updateCustomGpxPreview);
+    customRunTitleInput.addEventListener("input", updateCustomGpxPreview);
+
+    const customButton = document.querySelector("[data-custom-gpx-product] [data-cart-add]");
+    if (customButton) {
+      customButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const runTitle = customRunTitleInput.value.trim();
+        const file = customGpxFileInput.files?.[0];
+
+        if (!runTitle || !file) {
+          window.alert("Please add a run title and choose a GPX file before adding this custom map to your cart.");
+          return;
+        }
+
+        addItem("Custom GPX Run", "Custom", 129, {
+          runTitle,
+          gpxFileName: file.name,
+        });
+      });
+    }
+  }
 
   cartClear.addEventListener("click", () => {
     cart.length = 0;
@@ -254,22 +304,31 @@
     }
   });
 
-  function addItem(title, size, price) {
-    const existingItem = cart.find((item) => item.title === title && item.size === size);
+  function addItem(title, size, price, metadata = {}) {
+    const normalizedMetadata = metadata && typeof metadata === "object" ? metadata : {};
+    const existingItem = cart.find((item) => item.title === title && item.size === size && JSON.stringify(item.metadata || {}) === JSON.stringify(normalizedMetadata));
 
     if (existingItem) {
       existingItem.quantity += 1;
       existingItem.price = price || existingItem.price || 0;
+      existingItem.metadata = normalizedMetadata;
     } else {
-      cart.push({ title, size: size || "8x10", quantity: 1, price: Number(price) || 0 });
+      cart.push({
+        title,
+        size: size || "8x10",
+        quantity: 1,
+        price: Number(price) || 0,
+        metadata: Object.keys(normalizedMetadata).length ? normalizedMetadata : undefined,
+      });
     }
 
     saveCart();
     renderCart();
   }
 
-  function removeItem(title, size) {
-    const index = cart.findIndex((item) => item.title === title && item.size === size);
+  function removeItem(title, size, metadata = {}) {
+    const normalizedMetadata = metadata && typeof metadata === "object" ? metadata : {};
+    const index = cart.findIndex((item) => item.title === title && item.size === size && JSON.stringify(item.metadata || {}) === JSON.stringify(normalizedMetadata));
 
     if (index >= 0) {
       cart.splice(index, 1);
@@ -278,8 +337,9 @@
     }
   }
 
-  function changeQuantity(title, size, delta) {
-    const item = cart.find((entry) => entry.title === title && entry.size === size);
+  function changeQuantity(title, size, delta, metadata = {}) {
+    const normalizedMetadata = metadata && typeof metadata === "object" ? metadata : {};
+    const item = cart.find((entry) => entry.title === title && entry.size === size && JSON.stringify(entry.metadata || {}) === JSON.stringify(normalizedMetadata));
 
     if (!item) {
       return;
@@ -288,7 +348,7 @@
     item.quantity += delta;
 
     if (item.quantity <= 0) {
-      removeItem(title, size);
+      removeItem(title, size, normalizedMetadata);
       return;
     }
 
@@ -330,12 +390,22 @@
       const product = getProduct(item.title);
       const row = document.createElement("article");
       row.className = "cart-item";
+      const metadataLines = [];
+
+      if (item.metadata?.runTitle) {
+        metadataLines.push(`Run: ${item.metadata.runTitle}`);
+      }
+
+      if (item.metadata?.gpxFileName) {
+        metadataLines.push(`GPX: ${item.metadata.gpxFileName}`);
+      }
 
       row.innerHTML = `
         <div class="cart-item-swatch ${product?.swatchClass || ""}" aria-hidden="true"></div>
         <div>
           <h3>${item.title}</h3>
           <p>${item.size || "8x10"} • ${formatCurrency(item.price || 0)} each</p>
+          ${metadataLines.length ? `<p class="cart-item-meta">${metadataLines.join(" • ")}</p>` : ""}
         </div>
         <div class="cart-item-controls">
           <div class="cart-quantity" aria-label="Quantity controls for ${item.title}">
@@ -347,9 +417,9 @@
         </div>
       `;
 
-      row.querySelector('[data-action="decrease"]').addEventListener("click", () => changeQuantity(item.title, item.size || "8x10", -1));
-      row.querySelector('[data-action="increase"]').addEventListener("click", () => changeQuantity(item.title, item.size || "8x10", 1));
-      row.querySelector('[data-action="remove"]').addEventListener("click", () => removeItem(item.title, item.size || "8x10"));
+      row.querySelector('[data-action="decrease"]').addEventListener("click", () => changeQuantity(item.title, item.size || "8x10", -1, item.metadata));
+      row.querySelector('[data-action="increase"]').addEventListener("click", () => changeQuantity(item.title, item.size || "8x10", 1, item.metadata));
+      row.querySelector('[data-action="remove"]').addEventListener("click", () => removeItem(item.title, item.size || "8x10", item.metadata));
 
       cartItems.appendChild(row);
     });
@@ -374,6 +444,7 @@
           size: typeof item.size === "string" && item.size ? item.size : "8x10",
           quantity: Number(item.quantity) || 0,
           price: Number(item.price) || 0,
+          metadata: item.metadata && typeof item.metadata === "object" ? item.metadata : undefined,
         }))
         .filter((item) => item.title && item.quantity > 0);
     } catch {

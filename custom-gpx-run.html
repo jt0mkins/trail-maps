@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom GPX Run | Trail Maps NZ</title>
+    <meta name="description" content="Upload your own GPX route and create a custom trail map order." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Trail Maps NZ home">
+          <span class="brand-mark">TM</span>
+          <span>
+            <strong>Trail Maps NZ</strong>
+            <small>3D printed Great Walk maps</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="store.html">Store</a>
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="product-detail reveal" data-custom-gpx-product>
+        <a class="back-link" href="store.html">← Back to store</a>
+        <div class="product-detail-grid">
+          <div class="product-detail-visual custom-gpx"></div>
+          <div class="product-detail-copy">
+            <p class="eyebrow">Custom route</p>
+            <h1>Custom GPX Run</h1>
+            <p>
+              Upload your own GPX file and give it a memorable title to create a bespoke route order.
+            </p>
+            <form class="custom-gpx-form" data-custom-gpx-form>
+              <label class="custom-gpx-field">
+                <span>Run title</span>
+                <input type="text" name="run-title" data-custom-run-title placeholder="e.g. Sunrise Ridge Loop" required />
+              </label>
+              <label class="custom-gpx-field">
+                <span>Upload GPX file</span>
+                <input type="file" name="gpx-file" accept=".gpx,application/gpx+xml" data-custom-gpx-file required />
+              </label>
+              <p class="custom-gpx-help">
+                Your uploaded route will be attached to the cart entry so you can keep it alongside your map order.
+              </p>
+              <div class="custom-gpx-preview" data-custom-gpx-preview>Choose a GPX file to preview it here.</div>
+            </form>
+            <div class="product-detail-meta">
+              <span>NZ$129</span>
+              <button type="button" class="button button-primary" data-cart-add>Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Trail Maps NZ. Premium 3D printed trail art inspired by Aotearoa.</p>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
+</html>
