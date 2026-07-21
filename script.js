@@ -58,16 +58,16 @@
   const formatCurrency = (value) => `NZ$${Math.round(value).toLocaleString("en-NZ")}`;
 
   const catalogProducts = [
-    { title: "Milford Track Relief", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford" },
-    { title: "Routeburn Track Relief", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn" },
-    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel" },
-    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro" },
-    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler" },
-    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 159, swatchClass: "heaphy" },
-    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 149, swatchClass: "rangi" },
-    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 159, swatchClass: "paparoa" },
-    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 149, swatchClass: "whanganui" },
-    { title: "Great Walks Collection Set", description: "A curated trio of trail maps.", price: 449, swatchClass: "route-alternates" },
+    { title: "Milford Track Relief", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "11x14": 209, "16x20": 249 } },
+    { title: "Routeburn Track Relief", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "11x14": 199, "16x20": 239 } },
+    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
+    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
+    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler", sizes: { "8x10": 169, "11x14": 199, "16x20": 239 } },
+    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 159, swatchClass: "heaphy", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
+    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 149, swatchClass: "rangi", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
+    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 159, swatchClass: "paparoa", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
+    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 149, swatchClass: "whanganui", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
+    { title: "Great Walks Collection Set", description: "A curated trio of trail maps.", price: 449, swatchClass: "route-alternates", sizes: { "Set (3pcs)": 449 } },
   ];
 
   const products = [
@@ -82,6 +82,72 @@
     }),
     ...catalogProducts.filter((item) => !Array.from(document.querySelectorAll(".product-card")).some((card) => card.querySelector("h2")?.textContent?.trim() === item.title)),
   ];
+
+  // Inject size selector UI into product cards and product detail pages
+  Array.from(document.querySelectorAll(".product-card, .product-detail")).forEach((container) => {
+    const title = container.querySelector("h1, h2")?.textContent?.trim();
+    const product = products.find((p) => p.title === title);
+    if (!product) return;
+
+    const sizes = product.sizes || (product.price ? { "8x10": product.price } : { "8x10": 0 });
+
+    const priceSpan = container.querySelector(".product-meta span");
+
+    // If a selector already exists (radios or select), wire it up instead of injecting another
+    const existingSelector = container.querySelector(".size-selector");
+    if (existingSelector) {
+      if (existingSelector.tagName === "SELECT") {
+        // update options to reflect sizes (replace existing options)
+        existingSelector.innerHTML = "";
+        Object.keys(sizes).forEach((sizeKey, idx) => {
+          const option = document.createElement("option");
+          option.value = sizeKey;
+          option.textContent = `${sizeKey} — NZ$${sizes[sizeKey]}`;
+          if (idx === 0) option.selected = true;
+          existingSelector.appendChild(option);
+        });
+
+        if (priceSpan) priceSpan.textContent = `NZ$${sizes[existingSelector.value] || sizes[Object.keys(sizes)[0]]}`;
+        existingSelector.addEventListener("change", () => {
+          if (priceSpan) priceSpan.textContent = `NZ$${sizes[existingSelector.value] || product.price}`;
+        });
+      } else {
+        // assume a radio group; wire change handlers and set initial price
+        const radios = existingSelector.querySelectorAll("input[type='radio']");
+        radios.forEach((r) => {
+          r.addEventListener("change", () => {
+            if (r.checked && priceSpan) priceSpan.textContent = `NZ$${sizes[r.value] || product.price}`;
+          });
+        });
+
+        const checked = existingSelector.querySelector("input[type='radio']:checked");
+        if (checked && priceSpan) priceSpan.textContent = `NZ$${sizes[checked.value] || product.price}`;
+      }
+
+      return;
+    }
+
+    // create select element when no selector exists
+    const select = document.createElement("select");
+    select.className = "size-selector";
+
+    Object.keys(sizes).forEach((sizeKey, idx) => {
+      const option = document.createElement("option");
+      option.value = sizeKey;
+      option.textContent = `${sizeKey} — NZ$${sizes[sizeKey]}`;
+      if (idx === 0) option.selected = true;
+      select.appendChild(option);
+    });
+
+    if (priceSpan) priceSpan.textContent = `NZ$${sizes[Object.keys(sizes)[0]]}`;
+
+    const btn = container.querySelector("[data-cart-add]");
+    if (btn) btn.insertAdjacentElement("beforebegin", select);
+
+    select.addEventListener("change", () => {
+      if (priceSpan) priceSpan.textContent = `NZ$${sizes[select.value]}`;
+    });
+  });
 
   const cart = loadCart();
 
@@ -115,13 +181,19 @@
       const titleElement = detailContainer?.querySelector("h1, h2");
       const title = titleElement?.textContent?.trim();
       const product = products.find((item) => item.title === title);
-      const selectedSize = detailContainer?.querySelector(".size-selector input[type='radio']:checked")?.value || "8x10";
-
-      if (!product) {
-        return;
+      let selectedSize = "8x10";
+      const sizeSelect = detailContainer?.querySelector(".size-selector");
+      if (sizeSelect) {
+        selectedSize = sizeSelect.value || selectedSize;
+      } else {
+        const checked = detailContainer?.querySelector(".size-selector input[type='radio']:checked");
+        if (checked) selectedSize = checked.value;
       }
 
-      addItem(product.title, selectedSize, product.price);
+      if (!product) return;
+
+      const unitPrice = (product.sizes && product.sizes[selectedSize]) ? product.sizes[selectedSize] : product.price;
+      addItem(product.title, selectedSize, unitPrice);
     });
   });
 
@@ -230,8 +302,7 @@
 
   function getSubtotal() {
     return cart.reduce((total, item) => {
-      const product = getProduct(item.title);
-      const unitPrice = Number(item.price) || product?.price || 0;
+      const unitPrice = Number(item.price) || 0;
       return total + unitPrice * item.quantity;
     }, 0);
   }
@@ -264,7 +335,7 @@
         <div class="cart-item-swatch ${product?.swatchClass || ""}" aria-hidden="true"></div>
         <div>
           <h3>${item.title}</h3>
-          <p>${item.size || "8x10"} • ${formatCurrency(product?.price || 0)} each</p>
+          <p>${item.size || "8x10"} • ${formatCurrency(item.price || 0)} each</p>
         </div>
         <div class="cart-item-controls">
           <div class="cart-quantity" aria-label="Quantity controls for ${item.title}">
