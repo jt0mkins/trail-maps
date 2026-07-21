@@ -54,6 +54,12 @@ This project deploys by publishing the site files to the `gh-pages` branch with 
 4. Choose the `gh-pages` branch and the `/ (root)` folder.
 5. Push to `main` to trigger the workflow, or run it manually from the **Actions** tab.
 
+After the workflow completes, open your site in a browser at:
+
+`https://<your-github-username>.github.io/<your-repo-name>/`
+
+If you use a GitHub organization, replace `<your-github-username>` with the org name.
+
 ## How to view locally
 
 Open `index.html` in a browser, or use a local static server if you prefer.

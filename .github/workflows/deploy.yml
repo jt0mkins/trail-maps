@@ -28,3 +28,12 @@ jobs:
           publish_dir: .
           publish_branch: gh-pages
           force_orphan: true
+          keep_history: true
+          exclude_assets: |
+            .github/**
+            .venv/**
+            __pycache__/**
+            README.md
+            server.py
+            .gitignore
+            tests/**
