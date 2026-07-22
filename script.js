@@ -62,15 +62,15 @@
   const formatCurrency = (value) => `NZ$${Math.round(value).toLocaleString("en-NZ")}`;
 
   const catalogProducts = [
-    { title: "Milford Track Relief", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "11x14": 209, "16x20": 249 } },
-    { title: "Routeburn Track Relief", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "11x14": 199, "16x20": 239 } },
-    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
-    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
-    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler", sizes: { "8x10": 169, "11x14": 199, "16x20": 239 } },
-    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 159, swatchClass: "heaphy", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
-    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 149, swatchClass: "rangi", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
-    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 159, swatchClass: "paparoa", sizes: { "8x10": 159, "11x14": 189, "16x20": 229 } },
-    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 149, swatchClass: "whanganui", sizes: { "8x10": 149, "11x14": 179, "16x20": 219 } },
+    { title: "Milford Track Relief", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
+    { title: "Routeburn Track Relief", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
+    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
+    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
+    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
+    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 159, swatchClass: "heaphy", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
+    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 149, swatchClass: "rangi", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
+    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 159, swatchClass: "paparoa", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
+    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 149, swatchClass: "whanganui", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
     { title: "Great Walks Collection Set", description: "A curated trio of trail maps.", price: 449, swatchClass: "route-alternates", sizes: { "Set (3pcs)": 449 } },
   ];
 
@@ -87,6 +87,42 @@
     ...catalogProducts.filter((item) => !Array.from(document.querySelectorAll(".product-card")).some((card) => card.querySelector("h2")?.textContent?.trim() === item.title)),
   ];
 
+  const getStartingPrice = (product) => {
+    if (product?.sizes) {
+      const values = Object.values(product.sizes).map((value) => Number(value) || 0);
+      return values.length ? Math.min(...values) : Number(product.price) || 0;
+    }
+
+    return Number(product?.price) || 0;
+  };
+
+  const getSelectedPrice = (product, selectedSize) => {
+    if (product?.sizes && selectedSize && product.sizes[selectedSize] != null) {
+      return product.sizes[selectedSize];
+    }
+
+    return Number(product?.price) || 0;
+  };
+
+  const formatPriceLabel = (product, selectedSize, isCard = false) => {
+    const price = getSelectedPrice(product, selectedSize);
+    if (isCard) {
+      return `Starting from ${formatCurrency(price)}`;
+    }
+
+    return `${formatCurrency(price)}`;
+  };
+
+  Array.from(document.querySelectorAll(".product-card")).forEach((card) => {
+    const title = card.querySelector("h2")?.textContent?.trim();
+    const product = products.find((item) => item.title === title);
+    const priceSpan = card.querySelector(".product-meta span");
+
+    if (priceSpan && product) {
+      priceSpan.textContent = formatPriceLabel(product, null, true);
+    }
+  });
+
   // Inject size selector UI into product cards and product detail pages
   Array.from(document.querySelectorAll(".product-card, .product-detail")).forEach((container) => {
     const title = container.querySelector("h1, h2")?.textContent?.trim();
@@ -99,7 +135,7 @@
 
     const sizes = product.sizes || (product.price ? { "8x10": product.price } : { "8x10": 0 });
 
-    const priceSpan = container.querySelector(".product-meta span");
+    const priceSpan = container.querySelector(".product-meta span, .product-detail-meta span");
 
     // If a selector already exists (radios or select), wire it up instead of injecting another
     const existingSelector = container.querySelector(".size-selector");
@@ -115,21 +151,21 @@
           existingSelector.appendChild(option);
         });
 
-        if (priceSpan) priceSpan.textContent = `NZ$${sizes[existingSelector.value] || sizes[Object.keys(sizes)[0]]}`;
+        if (priceSpan) priceSpan.textContent = formatPriceLabel(product, existingSelector.value, false);
         existingSelector.addEventListener("change", () => {
-          if (priceSpan) priceSpan.textContent = `NZ$${sizes[existingSelector.value] || product.price}`;
+          if (priceSpan) priceSpan.textContent = formatPriceLabel(product, existingSelector.value, false);
         });
       } else {
         // assume a radio group; wire change handlers and set initial price
         const radios = existingSelector.querySelectorAll("input[type='radio']");
         radios.forEach((r) => {
           r.addEventListener("change", () => {
-            if (r.checked && priceSpan) priceSpan.textContent = `NZ$${sizes[r.value] || product.price}`;
+            if (r.checked && priceSpan) priceSpan.textContent = formatPriceLabel(product, r.value, false);
           });
         });
 
         const checked = existingSelector.querySelector("input[type='radio']:checked");
-        if (checked && priceSpan) priceSpan.textContent = `NZ$${sizes[checked.value] || product.price}`;
+        if (checked && priceSpan) priceSpan.textContent = formatPriceLabel(product, checked.value, false);
       }
 
       return;
@@ -147,13 +183,13 @@
       select.appendChild(option);
     });
 
-    if (priceSpan) priceSpan.textContent = `NZ$${sizes[Object.keys(sizes)[0]]}`;
+    if (priceSpan) priceSpan.textContent = formatPriceLabel(product, Object.keys(sizes)[0], false);
 
     const btn = container.querySelector("[data-cart-add]");
     if (btn) btn.insertAdjacentElement("beforebegin", select);
 
     select.addEventListener("change", () => {
-      if (priceSpan) priceSpan.textContent = `NZ$${sizes[select.value]}`;
+      if (priceSpan) priceSpan.textContent = formatPriceLabel(product, select.value, false);
     });
   });
 
