@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | Trail Maps NZ</title>
+    <meta name="description" content="Learn about the story behind Trail Maps NZ and our 3D printed Great Walk maps." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Trail Maps NZ home">
+          <span class="brand-mark">TM</span>
+          <span>
+            <strong>Trail Maps NZ</strong>
+            <small>3D printed Great Walk maps</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="store.html">Store</a>
+          <a href="about.html" aria-current="page">About us</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+        <div class="header-cart">
+          <button
+            type="button"
+            class="header-cart-toggle"
+            id="header-cart-toggle"
+            aria-expanded="false"
+            aria-controls="header-cart-panel"
+          >
+            <span>Cart</span>
+            <span class="header-cart-badge" id="cart-count-badge">0</span>
+          </button>
+
+          <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
+            <div class="cart-panel-header">
+              <strong>Cart summary</strong>
+              <span id="cart-count-label">0 items</span>
+            </div>
+            <div id="cart-empty" class="cart-empty">Your cart is empty. Add a trail map to get started.</div>
+            <div id="cart-items" class="cart-items header-cart-items" hidden></div>
+            <div class="cart-totals header-cart-totals">
+              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
+              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
+            </div>
+            <div class="cart-actions">
+              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
+              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="page-intro reveal">
+        <p class="eyebrow">About us</p>
+        <h1>We make trail memories you can hold onto.</h1>
+        <p>
+          Trail Maps NZ was created for people who love New Zealand's outdoors and want to celebrate the
+          places that mattered most to them.
+        </p>
+      </section>
+
+      <section class="about-layout">
+        <article class="about-card reveal">
+          <h2>Our story</h2>
+          <p>
+            We started with a single Great Walk map for a friend who had just completed the Milford Track.
+            The response made it clear that there was a need for thoughtful, locally made trail art.
+          </p>
+          <p>
+            Today, we design 3D printed maps that balance accurate terrain with a clean, modern look. Each
+            product is intended to feel personal, giftable, and display-worthy.
+          </p>
+        </article>
+
+        <article class="about-card reveal">
+          <h2>What we value</h2>
+          <ul class="value-list">
+            <li>Local design inspired by Aotearoa's landscapes</li>
+            <li>Durable prints made for long-term display</li>
+            <li>Personal service for custom orders and framing</li>
+            <li>Respect for the places and stories behind each route</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Trail Maps NZ. Premium 3D printed trail art inspired by Aotearoa.</p>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </footer>
+  </body>
+</html>
