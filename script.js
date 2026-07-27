@@ -62,8 +62,8 @@
   const formatCurrency = (value) => `NZ$${Math.round(value).toLocaleString("en-NZ")}`;
 
   const catalogProducts = [
-    { title: "Milford Track Relief", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
-    { title: "Routeburn Track Relief", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
+    { title: "Milford Track", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
+    { title: "Routeburn Track", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
     { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
     { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
     { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
