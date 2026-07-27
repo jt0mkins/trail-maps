@@ -1069,7 +1069,7 @@ textarea {
   }
 
   .header-cart{
-    width:100%;
+    width:.5rem;
     justify-content:center;
     margin-left:0;
   }
