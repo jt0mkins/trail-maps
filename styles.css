@@ -116,6 +116,32 @@ textarea {
   box-shadow: 0 10px 22px rgba(182, 92, 45, 0.24);
 }
 
+.nav-toggle {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 251, 244, 0.94);
+  color: var(--text);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.nav-toggle-icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.24rem;
+}
+
+.nav-toggle-icon span {
+  width: 1.05rem;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
@@ -192,6 +218,41 @@ textarea {
 .nav a:hover {
   background: rgba(182, 92, 45, 0.12);
   color: var(--accent-dark);
+}
+
+@media (max-width: 780px) {
+  .header-inner {
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding-top: 0.5rem;
+  }
+
+  .nav.is-open {
+    display: flex;
+  }
+
+  .nav a {
+    width: 100%;
+    padding: 0.8rem 0.95rem;
+  }
+
+  .header-cart {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 .hero {

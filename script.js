@@ -7,6 +7,40 @@
   const customRunTitleInput = document.querySelector("[data-custom-run-title]");
   const customGpxPreview = document.querySelector("[data-custom-gpx-preview]");
   const header = document.querySelector(".site-header");
+  const siteNav = document.querySelector(".site-header .nav");
+
+  if (siteNav && !document.querySelector(".nav-toggle")) {
+    const navToggle = document.createElement("button");
+    navToggle.className = "nav-toggle";
+    navToggle.type = "button";
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-controls", "site-nav");
+    navToggle.innerHTML = '<span class="nav-toggle-label">Menu</span><span class="nav-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span>';
+    siteNav.id = "site-nav";
+    siteNav.insertAdjacentElement("beforebegin", navToggle);
+
+    const toggleMenu = () => {
+      const isOpen = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!isOpen));
+      siteNav.classList.toggle("is-open", !isOpen);
+    };
+
+    navToggle.addEventListener("click", toggleMenu);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        navToggle.setAttribute("aria-expanded", "false");
+        siteNav.classList.remove("is-open");
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 780) {
+        navToggle.setAttribute("aria-expanded", "false");
+        siteNav.classList.remove("is-open");
+      }
+    });
+  }
 
   if (header && !document.getElementById("header-cart-toggle")) {
     header.querySelector(".header-inner")?.insertAdjacentHTML(
