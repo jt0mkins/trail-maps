@@ -1119,7 +1119,7 @@ textarea {
   }
 
   .header-cart-panel{
-    width:min(95vw,400px);
+    width:min(95vw,200px);
     right:50%;
     transform:translateX(50%);
   }
