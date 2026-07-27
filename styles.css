@@ -970,156 +970,135 @@ textarea {
   }
 }
 
-/* ==========================
-   MOBILE RESPONSIVE STYLES
-   ========================== */
+/* ==========================================================
+   IMPROVED MOBILE RESPONSIVE STYLES
+   ========================================================== */
 
-@media (max-width: 768px) {
+@media (max-width: 900px){
 
-  /* General */
-  .container {
-    width: 100%;
-    padding: 0 1rem;
-    box-sizing: border-box;
+  .hero-grid,
+  .split-layout,
+  .about-layout,
+  .contact-grid,
+  .product-detail-grid,
+  .cart-shell{
+    grid-template-columns:1fr;
   }
 
-  /* Header */
-  .header-inner {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
+  .feature-grid,
+  .product-grid,
+  .mini-product-grid{
+    grid-template-columns:1fr;
   }
 
-  .nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
+  .header-inner{
+    flex-direction:column;
+    align-items:center;
+    gap:1rem;
   }
 
-  .nav a {
-    font-size: 0.95rem;
+  .brand{
+    justify-content:center;
+    text-align:center;
   }
 
-  .header-cart {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+  .nav{
+    justify-content:center;
+    gap:.5rem;
   }
 
-  /* Hero Section */
-  .hero {
-    padding: 3rem 0;
+  .header-cart{
+    width:100%;
+    justify-content:center;
+    margin-left:0;
   }
 
-  .hero-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+  .hero{
+    padding:3rem 0;
   }
 
-  .hero-copy {
-    text-align: center;
+  .hero-copy{
+    text-align:center;
   }
 
-  .hero-copy h1 {
-    font-size: 2rem;
-    line-height: 1.1;
+  .hero-copy h1{
+    font-size:clamp(2rem,8vw,3.2rem);
+    line-height:1.1;
+    max-width:100%;
   }
 
-  .lead {
-    font-size: 1rem;
+  .hero-actions{
+    flex-direction:column;
   }
 
-  .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.75rem;
+  .button{
+    width:100%;
   }
 
-  .hero-actions .button {
-    width: 100%;
+  .nav a{
+    width:auto;
   }
 
-  .hero-stats {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
+  .hero-stats{
+    grid-template-columns:repeat(2,1fr);
   }
 
-  /* Hero Visual */
-  .hero-visual {
-    display: flex;
-    justify-content: center;
+  .hero-stats div:last-child{
+    grid-column:span 2;
   }
 
-  .map-card {
-    width: 100%;
-    max-width: 350px;
+  .map-card{
+    max-width:300px;
+    margin:auto;
   }
 
-  /* Feature Cards */
-  .feature-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .footer-inner{
+    flex-direction:column;
+    text-align:center;
   }
 
-  /* Best Sellers Section */
-  .split-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .mini-product-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  /* Footer */
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-  }
-
-  /* Cart Dropdown */
-  .header-cart-panel {
-    width: 95vw;
-    right: 50%;
-    transform: translateX(50%);
-    max-width: 400px;
+  .header-cart-panel{
+    width:min(95vw,400px);
+    right:50%;
+    transform:translateX(50%);
   }
 }
 
-/* Extra Small Phones */
-@media (max-width: 480px) {
+@media (max-width:480px){
 
-  .hero-copy h1 {
-    font-size: 1.7rem;
+  .container{
+    width:100%;
+    padding:0 1rem;
   }
 
-  .section-heading h2 {
-    font-size: 1.5rem;
+  .hero-copy h1{
+    font-size:1.8rem;
   }
 
-  .hero-stats dt {
-    font-size: 1.4rem;
+  .section-heading h2,
+  .page-intro h1{
+    font-size:1.8rem;
   }
 
-  .button {
-    padding: 0.9rem 1rem;
-    font-size: 0.95rem;
+  .hero-stats{
+    grid-template-columns:1fr;
   }
 
-  .brand strong {
-    font-size: 1rem;
+  .hero-stats div:last-child{
+    grid-column:auto;
   }
 
-  .brand small {
-    font-size: 0.8rem;
+  .section{
+    padding:2.5rem 0;
+  }
+
+  .lead,
+  .section-heading p,
+  .product-content p{
+    font-size:.95rem;
+  }
+
+  .product-image{
+    min-height:180px;
   }
 }
