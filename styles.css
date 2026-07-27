@@ -969,3 +969,157 @@ textarea {
     justify-items: start;
   }
 }
+
+/* ==========================
+   MOBILE RESPONSIVE STYLES
+   ========================== */
+
+@media (max-width: 768px) {
+
+  /* General */
+  .container {
+    width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .header-inner {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .nav a {
+    font-size: 0.95rem;
+  }
+
+  .header-cart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 3rem 0;
+  }
+
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-copy {
+    text-align: center;
+  }
+
+  .hero-copy h1 {
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  /* Hero Visual */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .map-card {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  /* Feature Cards */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Best Sellers Section */
+  .split-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .mini-product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  /* Cart Dropdown */
+  .header-cart-panel {
+    width: 95vw;
+    right: 50%;
+    transform: translateX(50%);
+    max-width: 400px;
+  }
+}
+
+/* Extra Small Phones */
+@media (max-width: 480px) {
+
+  .hero-copy h1 {
+    font-size: 1.7rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero-stats dt {
+    font-size: 1.4rem;
+  }
+
+  .button {
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .brand strong {
+    font-size: 1rem;
+  }
+
+  .brand small {
+    font-size: 0.8rem;
+  }
+}
