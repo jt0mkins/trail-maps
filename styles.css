@@ -1009,7 +1009,8 @@ textarea {
 
   .button,
   .nav a,
-  .product-meta button {
+  .product-meta button,
+  .product-detail-meta button {
     width: 100%;
   }
 
@@ -1017,7 +1018,8 @@ textarea {
     flex-direction: column;
   }
 
-  .product-meta {
+  .product-meta,
+  .product-detail-meta {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -1069,7 +1071,7 @@ textarea {
   }
 
   .header-cart{
-    width:.5rem;
+    width:100%;
     justify-content:center;
     margin-left:0;
   }
@@ -1119,9 +1121,10 @@ textarea {
   }
 
   .header-cart-panel{
-    width:min(95vw,200px);
-    right:50%;
-    transform:translateX(50%);
+    width:min(92vw,340px);
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
   }
 }
 
