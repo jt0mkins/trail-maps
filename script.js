@@ -106,6 +106,15 @@
 
   const formatCurrency = (value) => `NZ$${Math.round(value).toLocaleString("en-NZ")}`;
 
+  const escapeHtml = (value) =>
+    String(value).replace(/[&<>"']/g, (char) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    }[char]));
+
   const catalogProducts = [
     { title: "Milford Track", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
     { title: "Routeburn Track", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
@@ -286,7 +295,11 @@
       if (!product) return;
 
       const unitPrice = (product.sizes && product.sizes[selectedSize]) ? product.sizes[selectedSize] : product.price;
-      addItem(product.title, selectedSize, unitPrice);
+      const walkDatesInput = detailContainer?.querySelector("[data-custom-run-title]");
+      const walkDates = walkDatesInput?.value.trim();
+      const metadata = walkDates ? { walkDates } : {};
+
+      addItem(product.title, selectedSize, unitPrice, metadata);
     });
   });
 
@@ -474,11 +487,15 @@
       const metadataLines = [];
 
       if (item.metadata?.runTitle) {
-        metadataLines.push(`Run: ${item.metadata.runTitle}`);
+        metadataLines.push(`Run: ${escapeHtml(item.metadata.runTitle)}`);
       }
 
       if (item.metadata?.gpxFileName) {
-        metadataLines.push(`GPX: ${item.metadata.gpxFileName}`);
+        metadataLines.push(`GPX: ${escapeHtml(item.metadata.gpxFileName)}`);
+      }
+
+      if (item.metadata?.walkDates) {
+        metadataLines.push(`Dates: ${escapeHtml(item.metadata.walkDates)}`);
       }
 
       row.innerHTML = `
