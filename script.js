@@ -25,7 +25,17 @@
       siteNav.classList.toggle("is-open", !isOpen);
     };
 
-    navToggle.addEventListener("click", toggleMenu);
+    navToggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!siteNav.contains(event.target) && !navToggle.contains(event.target)) {
+        navToggle.setAttribute("aria-expanded", "false");
+        siteNav.classList.remove("is-open");
+      }
+    });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
@@ -54,7 +64,8 @@
             aria-expanded="false"
             aria-controls="header-cart-panel"
           >
-            <span>Cart</span>
+            <svg class="header-cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+            <span class="header-cart-label">Cart</span>
             <span class="header-cart-badge" id="cart-count-badge">0</span>
           </button>
 
