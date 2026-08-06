@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store | Trail Maps NZ</title>
+    <meta name="description" content="Shop 3D printed Great Walk trail maps from Trail Maps NZ." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner main-header">
+        <a class="brand" href="index.html" aria-label="Trail Maps NZ home">
+          <span class="brand-mark">TM</span>
+          <span>
+            <strong>Trail Maps NZ</strong>
+            <small>3D printed Great Walk maps</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="index.html">Home</a>
+          <a href="store.html" aria-current="page">Store</a>
+          <a href="about.html">About us</a>
+          <a href="contact.html">Contact us</a>
+        </nav>
+        <div class="header-cart">
+          <button
+            type="button"
+            class="header-cart-toggle"
+            id="header-cart-toggle"
+            aria-expanded="false"
+            aria-controls="header-cart-panel"
+          >
+            <svg class="header-cart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+            <span class="header-cart-label">Cart</span>
+            <span class="header-cart-badge" id="cart-count-badge">0</span>
+          </button>
+
+          <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
+            <div class="cart-panel-header">
+              <div class="cart-panel-title">
+                <strong>Cart summary</strong>
+                <span id="cart-count-label">0 items</span>
+              </div>
+              <button type="button" class="cart-panel-close" id="cart-panel-close" aria-label="Close cart">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+              </button>
+            </div>
+
+            <div id="cart-empty" class="cart-empty">
+              <svg class="cart-empty-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+              <p>Your cart is empty.</p>
+              <a href="store.html" class="cart-empty-link">Browse trail maps →</a>
+            </div>
+
+            <div id="cart-items" class="cart-items header-cart-items" hidden></div>
+
+            <div class="cart-totals header-cart-totals">
+              <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
+              <div><span>Shipping</span><strong>Calculated at checkout</strong></div>
+            </div>
+
+            <div class="cart-actions">
+              <button type="button" class="button button-primary" id="cart-checkout">Checkout</button>
+              <button type="button" class="button button-secondary" id="cart-clear">Clear cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container page-main">
+      <section class="page-intro reveal">
+        <p class="eyebrow">Store</p>
+        <h1>Choose from our 10 featured trail maps or create your own.</h1>
+        <p>
+          Each product is available in multiple finishes and can be displayed as a standalone art piece or paired with custom framing.
+        </p>
+      </section>
+
+      <section class="product-grid">
+        <article class="product-card reveal" data-product-page="milford-track.html" role="button" tabindex="0" aria-label="Open details for Milford Track">
+          <div class="product-image milford"></div>
+          <div class="product-content">
+            <h2>Milford Track</h2>
+            <p>Capture the dramatic landscapes of New Zealand's most iconic Great Walk. This highly detailed 3D terrain model showcases the Milford Track's journey through Fiordland, featuring rugged mountains, deep valleys, and the famous Mackinnon Pass.</p>
+            <div class="product-meta"><span>From NZ$98</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="routeburn-track.html" role="button" tabindex="0" aria-label="Open details for Routeburn Track">
+          <div class="product-image routeburn"></div>
+          <div class="product-content">
+            <h2>Routeburn Track</h2>
+            <p>Discover the breathtaking alpine landscapes of the Routeburn Track with this detailed 3D terrain model. Showcasing dramatic mountain peaks, glacier-carved valleys, and alpine lakes, it's a stunning tribute to one of New Zealand's Great Walks.</p>
+            <div class="product-meta"><span>From NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="abel-tasman-coast-track.html" role="button" tabindex="0" aria-label="Open details for Abel Tasman Coast Track">
+          <div class="product-image abel"></div>
+          <div class="product-content">
+            <h2>Abel Tasman Coast Track</h2>
+            <p>Experience the golden beaches and coastal beauty of the Abel Tasman Coast Track
+              with this detailed 3D terrain model. Featuring sheltered bays, rugged
+              headlands, and lush native forest, it captures the unique landscape of New
+              Zealand's most accessible Great Walk.</p>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="tongariro-alpine-crossing.html" role="button" tabindex="0" aria-label="Open details for Tongariro Alpine Crossing">
+          <div class="product-image tongariro"></div>
+          <div class="product-content">
+            <h2>Tongariro Alpine Crossing</h2>
+            <p>
+              Capture the dramatic volcanic landscape of New Zealand's most famous day hike.
+              This detailed 3D terrain model showcases the Tongariro Alpine Crossing's
+              rugged craters, lava flows, emerald lakes, and towering volcanic peaks.
+            </p>
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="kepler-track.html" role="button" tabindex="0" aria-label="Open details for Kepler Track">
+          <div class="product-image kepler"></div>
+          <div class="product-content">
+            <h2>Kepler Track</h2>
+            <p>
+              Explore the sweeping alpine ridgelines of the Kepler Track with this detailed
+              3D terrain model. Featuring panoramic mountain ranges, deep glacial valleys,
+              and the shores of Lake Te Anau, it captures one of New Zealand's most
+              spectacular Great Walks.
+            </p>
+            <div class="product-meta"><span>From NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="heaphy-track.html" role="button" tabindex="0" aria-label="Open details for Heaphy Track">
+          <div class="product-image heaphy"></div>
+          <div class="product-content">
+            <h2>Heaphy Track</h2>
+            <p>        
+              Discover the diverse landscapes of the Heaphy Track with this detailed 3D
+              terrain model. Featuring rugged coastlines, lush forests, rolling tussock
+              downs, and winding river valleys, it captures the incredible variety of one of
+              New Zealand's longest Great Walks.
+          </p>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="rakiura-track.html" role="button" tabindex="0" aria-label="Open details for Rakiura Track">
+          <div class="product-image rangi"></div>
+          <div class="product-content">
+            <h2>Rakiura Track</h2>
+            <p>
+              Explore the remote beauty of Stewart Island with this detailed 3D terrain
+              model. Showcasing rugged coastlines, rolling hills, and pristine native
+              forest, it captures the unique landscapes of the Rakiura Track, one of New
+              Zealand's Great Walks.
+            </p>
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="paparoa-track.html" role="button" tabindex="0" aria-label="Open details for Paparoa Track">
+          <div class="product-image paparoa"></div>
+          <div class="product-content">
+            <h2>Paparoa Track</h2>
+            <p>
+              Experience the dramatic landscapes of the Paparoa Track with this detailed
+              3D terrain model. Featuring towering limestone ranges, deep river gorges,
+              lush rainforest, and expansive alpine tops, it captures one of New Zealand's
+              newest Great Walks.
+            </p>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="whanganui-journey.html" role="button" tabindex="0" aria-label="Open details for Whanganui Journey">
+          <div class="product-image whanganui"></div>
+          <div class="product-content">
+            <h2>Whanganui Journey</h2>
+            <p>
+              Celebrate New Zealand's only Great Walk on water with this detailed 3D terrain
+              model. Showcasing the winding Whanganui River, deep forested valleys, and
+              dramatic river gorges, it captures the unique landscape of this iconic canoe
+              journey.
+            </p>
+
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="great-walks-collection-set.html" role="button" tabindex="0" aria-label="Open details for Great Walks Collection Set">
+          <div class="product-image route-alternates"></div>
+          <div class="product-content">
+            <h2>Great Walks Collection Set</h2>
+            <p>
+                Own the complete collection of New Zealand's Great Walks. This bundle
+                includes detailed 3D terrain models of every Great Walk, showcasing the
+                country's most iconic mountains, coastlines, forests, rivers, and volcanic
+                landscapes in one stunning collection.
+            </p>
+            <div class="product-meta"><span>From NZ$449</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+        <article class="product-card reveal" data-product-page="custom-gpx-run.html" role="button" tabindex="0" aria-label="Open details for Great Walks Collection Set">
+          <div class="product-image route-alternates"></div>
+          <div class="product-content">
+            <h2>Custom Route</h2>
+            <p>
+                Create your own personalized trail map with our custom route service. Whether you're planning a new adventure or want to preserve a memorable journey, we'll craft a detailed 3D terrain model that captures the unique features of your chosen path.
+            </p>
+            <div class="product-meta"><span>From NZ$199</span><button type="button" data-cart-add>Add to cart</button></div>
+          </div>
+        </article>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Trail Maps NZ. Premium 3D printed trail art inspired by Aotearoa.</p>
+        <a href="contact.html">Contact us</a>
+      </div>
+    </footer>
+    <script src="script.js" defer></script>
+  </body>
+</html>
