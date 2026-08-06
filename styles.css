@@ -1041,6 +1041,10 @@ textarea {
     flex-direction: column;
   }
 
+  .product-detail-visual {
+    min-height: 300px;
+  }
+
   .product-meta,
   .product-detail-meta {
     flex-direction: column;
@@ -1197,11 +1201,16 @@ textarea {
 
   .lead,
   .section-heading p,
-  .product-content p{
+  .product-content p,
+  .product-detail-copy p{
     font-size:.95rem;
   }
 
   .product-image{
     min-height:180px;
+  }
+
+  .product-detail-visual{
+    min-height:220px;
   }
 }
