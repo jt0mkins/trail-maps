@@ -973,7 +973,6 @@ textarea {
     max-width: 100%;
   }
 
-  .header-inner,
   .footer-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -1055,14 +1054,7 @@ textarea {
   }
 
   .header-inner{
-    flex-direction:column;
     align-items:center;
-    gap:1rem;
-  }
-
-  .brand{
-    justify-content:center;
-    text-align:center;
   }
 
   .nav{
@@ -1098,10 +1090,6 @@ textarea {
     width:100%;
   }
 
-  .nav a{
-    width:auto;
-  }
-
   .hero-stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -1125,6 +1113,14 @@ textarea {
     left:50%;
     right:auto;
     transform:translateX(-50%);
+  }
+}
+
+/* Tablet range only: nav is a visible inline bar here (the hamburger
+   takes over below 780px), so links shouldn't stretch full-width. */
+@media (min-width: 781px) and (max-width: 900px) {
+  .nav a {
+    width: auto;
   }
 }
 
