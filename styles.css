@@ -184,21 +184,50 @@ textarea {
   font-size: 0.9rem;
 }
 
+.header-cart-badge.bump {
+  animation: badge-bump 380ms ease;
+}
+
+@keyframes badge-bump {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .header-cart-panel {
   position: absolute;
   top: calc(100% + 0.7rem);
   right: 0;
-  width: min(320px, calc(100vw - 2rem));
+  width: min(360px, calc(100vw - 2rem));
   border: 1px solid var(--border);
   border-radius: 1.2rem;
   background: rgba(255, 251, 244, 0.96);
   box-shadow: var(--shadow);
   padding: 1rem;
   z-index: 20;
+  transform-origin: top right;
+  animation: cart-panel-in 180ms ease;
+}
+
+@keyframes cart-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .header-cart-items {
-  max-height: 180px;
+  max-height: 260px;
   overflow-y: auto;
 }
 
@@ -220,28 +249,29 @@ textarea {
   color: var(--accent-dark);
 }
 
-/* Home page only: a three-zone banner with tabs on the left, the logo
-   dead-centered, and the cart on the right (other pages keep the
-   logo-left layout). Equal 1fr side columns keep the logo centered
-   no matter how wide the nav or cart end up. */
-.home-header {
+/* Main pages (home, store, about, contact) only: a three-zone banner
+   with tabs on the left, the logo dead-centered, and the cart on the
+   right. Product/walk detail pages keep the logo-left layout. Equal
+   1fr side columns keep the logo centered no matter how wide the nav
+   or cart end up. */
+.main-header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
 }
 
-.home-header .nav,
-.home-header .nav-toggle {
+.main-header .nav,
+.main-header .nav-toggle {
   grid-column: 1;
   justify-self: start;
 }
 
-.home-header .brand {
+.main-header .brand {
   grid-column: 2;
   justify-self: center;
 }
 
-.home-header .header-cart {
+.main-header .header-cart {
   grid-column: 3;
   justify-self: end;
 }
@@ -644,6 +674,42 @@ textarea {
   cursor: pointer;
 }
 
+.size-picker {
+  position: fixed;
+  z-index: 30;
+  display: grid;
+  gap: 0.4rem;
+  min-width: 190px;
+  padding: 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: rgba(255, 251, 244, 0.97);
+  box-shadow: var(--shadow);
+  animation: cart-panel-in 150ms ease;
+}
+
+.size-picker-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: rgba(23, 49, 38, 0.05);
+  color: var(--text);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.size-picker-option:hover,
+.size-picker-option:focus-visible {
+  background: rgba(182, 92, 45, 0.14);
+  color: var(--accent-dark);
+  outline: none;
+}
+
 .product-detail {
   padding: 1rem 0 3rem;
 }
@@ -805,26 +871,81 @@ textarea {
 
 .cart-panel-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid rgba(23, 49, 38, 0.08);
 }
 
+.cart-panel-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
 .cart-panel-header strong {
   font-size: 1.05rem;
 }
 
-.cart-empty {
-  padding: 1rem 0;
+.cart-panel-close {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(23, 49, 38, 0.06);
   color: var(--muted);
+  cursor: pointer;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.cart-panel-close:hover {
+  background: rgba(23, 49, 38, 0.12);
+  color: var(--text);
+}
+
+.cart-empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  padding: 1.75rem 1rem;
+  text-align: center;
+}
+
+.cart-empty[hidden] {
+  display: none;
+}
+
+.cart-empty-icon {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+.cart-empty p {
+  margin: 0;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cart-empty-link {
+  font-weight: 800;
+  color: var(--accent-dark);
+}
+
+.cart-empty-link:hover {
+  text-decoration: underline;
 }
 
 .cart-items {
   display: grid;
   gap: 0.85rem;
   padding: 1rem 0;
+}
+
+.cart-items[hidden] {
+  display: none;
 }
 
 .cart-item {
@@ -836,6 +957,21 @@ textarea {
   border-radius: 1.1rem;
   border: 1px solid rgba(23, 49, 38, 0.1);
   background: rgba(255, 255, 255, 0.76);
+}
+
+.cart-item.just-added {
+  animation: cart-item-added 900ms ease;
+}
+
+@keyframes cart-item-added {
+  from {
+    background: rgba(182, 92, 45, 0.18);
+    border-color: rgba(182, 92, 45, 0.4);
+  }
+  to {
+    background: rgba(255, 255, 255, 0.76);
+    border-color: rgba(23, 49, 38, 0.1);
+  }
 }
 
 .cart-item-swatch {
@@ -901,7 +1037,17 @@ textarea {
 }
 
 .cart-remove {
-  font-size: 0.9rem;
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.cart-remove:hover {
+  background: rgba(182, 92, 45, 0.12);
+  color: var(--accent-dark);
 }
 
 .cart-totals {
@@ -1184,7 +1330,7 @@ textarea {
   }
 
   .header-cart-panel{
-    width:min(92vw,340px);
+    width:min(92vw,360px);
     right:0;
   }
 }

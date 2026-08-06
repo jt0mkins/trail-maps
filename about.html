@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
+      <div class="container header-inner main-header">
         <a class="brand" href="index.html" aria-label="Trail Maps NZ home">
           <span class="brand-mark">TM</span>
           <span>
@@ -44,10 +44,19 @@
 
           <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
             <div class="cart-panel-header">
-              <strong>Cart summary</strong>
-              <span id="cart-count-label">0 items</span>
+              <div class="cart-panel-title">
+                <strong>Cart summary</strong>
+                <span id="cart-count-label">0 items</span>
+              </div>
+              <button type="button" class="cart-panel-close" id="cart-panel-close" aria-label="Close cart">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+              </button>
             </div>
-            <div id="cart-empty" class="cart-empty">Your cart is empty. Add a trail map to get started.</div>
+            <div id="cart-empty" class="cart-empty">
+              <svg class="cart-empty-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+              <p>Your cart is empty.</p>
+              <a href="store.html" class="cart-empty-link">Browse trail maps →</a>
+            </div>
             <div id="cart-items" class="cart-items header-cart-items" hidden></div>
             <div class="cart-totals header-cart-totals">
               <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>

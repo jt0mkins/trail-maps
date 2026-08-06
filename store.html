@@ -15,7 +15,7 @@
   </head>
   <body>
     <header class="site-header">
-      <div class="container header-inner">
+      <div class="container header-inner main-header">
         <a class="brand" href="index.html" aria-label="Trail Maps NZ home">
           <span class="brand-mark">TM</span>
           <span>
@@ -44,12 +44,19 @@
 
           <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
             <div class="cart-panel-header">
-              <strong>Cart summary</strong>
-              <span id="cart-count-label">0 items</span>
+              <div class="cart-panel-title">
+                <strong>Cart summary</strong>
+                <span id="cart-count-label">0 items</span>
+              </div>
+              <button type="button" class="cart-panel-close" id="cart-panel-close" aria-label="Close cart">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+              </button>
             </div>
 
             <div id="cart-empty" class="cart-empty">
-              Your cart is empty. Add a trail map to get started.
+              <svg class="cart-empty-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+              <p>Your cart is empty.</p>
+              <a href="store.html" class="cart-empty-link">Browse trail maps →</a>
             </div>
 
             <div id="cart-items" class="cart-items header-cart-items" hidden></div>
@@ -83,7 +90,7 @@
           <div class="product-content">
             <h2>Milford Track</h2>
             <p>Capture the dramatic landscapes of New Zealand's most iconic Great Walk. This highly detailed 3D terrain model showcases the Milford Track's journey through Fiordland, featuring rugged mountains, deep valleys, and the famous Mackinnon Pass.</p>
-            <div class="product-meta"><span>NZ$98</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$98</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="routeburn-track.html" role="button" tabindex="0" aria-label="Open details for Routeburn Track">
@@ -91,7 +98,7 @@
           <div class="product-content">
             <h2>Routeburn Track</h2>
             <p>Discover the breathtaking alpine landscapes of the Routeburn Track with this detailed 3D terrain model. Showcasing dramatic mountain peaks, glacier-carved valleys, and alpine lakes, it's a stunning tribute to one of New Zealand's Great Walks.</p>
-            <div class="product-meta"><span>NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="abel-tasman-coast-track.html" role="button" tabindex="0" aria-label="Open details for Abel Tasman Coast Track">
@@ -102,7 +109,7 @@
               with this detailed 3D terrain model. Featuring sheltered bays, rugged
               headlands, and lush native forest, it captures the unique landscape of New
               Zealand's most accessible Great Walk.</p>
-            <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="tongariro-alpine-crossing.html" role="button" tabindex="0" aria-label="Open details for Tongariro Alpine Crossing">
@@ -114,7 +121,7 @@
               This detailed 3D terrain model showcases the Tongariro Alpine Crossing's
               rugged craters, lava flows, emerald lakes, and towering volcanic peaks.
             </p>
-            <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="kepler-track.html" role="button" tabindex="0" aria-label="Open details for Kepler Track">
@@ -127,7 +134,7 @@
               and the shores of Lake Te Anau, it captures one of New Zealand's most
               spectacular Great Walks.
             </p>
-            <div class="product-meta"><span>NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$169</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="heaphy-track.html" role="button" tabindex="0" aria-label="Open details for Heaphy Track">
@@ -140,7 +147,7 @@
               downs, and winding river valleys, it captures the incredible variety of one of
               New Zealand's longest Great Walks.
           </p>
-            <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="rakiura-track.html" role="button" tabindex="0" aria-label="Open details for Rakiura Track">
@@ -153,7 +160,7 @@
               forest, it captures the unique landscapes of the Rakiura Track, one of New
               Zealand's Great Walks.
             </p>
-            <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="paparoa-track.html" role="button" tabindex="0" aria-label="Open details for Paparoa Track">
@@ -166,7 +173,7 @@
               lush rainforest, and expansive alpine tops, it captures one of New Zealand's
               newest Great Walks.
             </p>
-            <div class="product-meta"><span>NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$159</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="whanganui-journey.html" role="button" tabindex="0" aria-label="Open details for Whanganui Journey">
@@ -180,7 +187,7 @@
               journey.
             </p>
 
-            <div class="product-meta"><span>NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$149</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="great-walks-collection-set.html" role="button" tabindex="0" aria-label="Open details for Great Walks Collection Set">
@@ -193,7 +200,7 @@
                 country's most iconic mountains, coastlines, forests, rivers, and volcanic
                 landscapes in one stunning collection.
             </p>
-            <div class="product-meta"><span>NZ$449</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$449</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
         <article class="product-card reveal" data-product-page="custom-gpx-run.html" role="button" tabindex="0" aria-label="Open details for Great Walks Collection Set">
@@ -203,7 +210,7 @@
             <p>
                 Create your own personalized trail map with our custom route service. Whether you're planning a new adventure or want to preserve a memorable journey, we'll craft a detailed 3D terrain model that captures the unique features of your chosen path.
             </p>
-            <div class="product-meta"><span>NZ$199</span><button type="button" data-cart-add>Add to cart</button></div>
+            <div class="product-meta"><span>From NZ$199</span><button type="button" data-cart-add>Add to cart</button></div>
           </div>
         </article>
       </section>

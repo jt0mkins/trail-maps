@@ -71,10 +71,19 @@
 
           <div class="header-cart-panel" id="header-cart-panel" aria-live="polite" hidden>
             <div class="cart-panel-header">
-              <strong>Cart summary</strong>
-              <span id="cart-count-label">0 items</span>
+              <div class="cart-panel-title">
+                <strong>Cart summary</strong>
+                <span id="cart-count-label">0 items</span>
+              </div>
+              <button type="button" class="cart-panel-close" id="cart-panel-close" aria-label="Close cart">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"></path></svg>
+              </button>
             </div>
-            <div id="cart-empty" class="cart-empty">Your cart is empty. Add a trail map to get started.</div>
+            <div id="cart-empty" class="cart-empty">
+              <svg class="cart-empty-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M2.5 3h2l2.4 12.2a1.5 1.5 0 0 0 1.48 1.3h8.24a1.5 1.5 0 0 0 1.47-1.18L20.5 7H6"></path></svg>
+              <p>Your cart is empty.</p>
+              <a href="store.html" class="cart-empty-link">Browse trail maps →</a>
+            </div>
             <div id="cart-items" class="cart-items header-cart-items" hidden></div>
             <div class="cart-totals header-cart-totals">
               <div><span>Subtotal</span><strong id="cart-subtotal">NZ$0</strong></div>
@@ -114,6 +123,8 @@
       '"': "&quot;",
       "'": "&#39;",
     }[char]));
+
+  const itemDomKey = (title, size, metadata) => `${title}__${size}__${JSON.stringify(metadata || {})}`;
 
   const catalogProducts = [
     { title: "Milford Track", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
@@ -161,7 +172,7 @@
   const formatPriceLabel = (product, selectedSize, isCard = false) => {
     const price = getSelectedPrice(product, selectedSize);
     if (isCard) {
-      return `Starting from ${formatCurrency(price)}`;
+      return `From ${formatCurrency(price)}`;
     }
 
     return `${formatCurrency(price)}`;
@@ -177,8 +188,9 @@
     }
   });
 
-  // Inject size selector UI into product cards and product detail pages
-  Array.from(document.querySelectorAll(".product-card, .product-detail")).forEach((container) => {
+  // Inject size selector UI into product detail pages only (store cards keep
+  // their "From $X" summary price and pick a size after clicking through).
+  Array.from(document.querySelectorAll(".product-detail")).forEach((container) => {
     const title = container.querySelector("h1, h2")?.textContent?.trim();
     const product = products.find((p) => p.title === title);
     if (!product) return;
@@ -275,7 +287,13 @@
   cartButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
       event.stopPropagation();
-      const detailContainer = event.currentTarget.closest(".product-detail") || event.currentTarget.closest(".product-card");
+      const card = event.currentTarget.closest(".product-card");
+      if (card) {
+        toggleSizePicker(event.currentTarget, card);
+        return;
+      }
+
+      const detailContainer = event.currentTarget.closest(".product-detail");
       const titleElement = detailContainer?.querySelector("h1, h2");
       const title = titleElement?.textContent?.trim();
       const product = products.find((item) => item.title === title);
@@ -283,7 +301,7 @@
       if (detailContainer?.matches("[data-custom-gpx-product]")) {
         selectedSize = "Custom";
       } else {
-        const sizeSelect = detailContainer?.querySelector(".size-selector");
+        const sizeSelect = detailContainer?.querySelector("select.size-selector");
         if (sizeSelect) {
           selectedSize = sizeSelect.value || selectedSize;
         } else {
@@ -347,18 +365,33 @@
     renderCart();
   });
 
+  const cartPanelClose = document.getElementById("cart-panel-close");
+
   if (headerCartToggle && headerCartPanel) {
     headerCartToggle.addEventListener("click", (event) => {
       event.stopPropagation();
       const isOpen = headerCartToggle.getAttribute("aria-expanded") === "true";
-      headerCartToggle.setAttribute("aria-expanded", String(!isOpen));
-      headerCartPanel.hidden = isOpen;
+      if (isOpen) {
+        closeCartPanel();
+      } else {
+        openCartPanel();
+      }
+    });
+
+    cartPanelClose?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      closeCartPanel();
     });
 
     document.addEventListener("click", (event) => {
       if (!headerCartPanel.contains(event.target) && !headerCartToggle.contains(event.target)) {
-        headerCartToggle.setAttribute("aria-expanded", "false");
-        headerCartPanel.hidden = true;
+        closeCartPanel();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeCartPanel();
       }
     });
   }
@@ -418,7 +451,114 @@
 
     saveCart();
     renderCart();
+    openCartPanel();
+    bumpCartBadge();
+    flashCartRow(itemDomKey(title, size || "8x10", normalizedMetadata));
   }
+
+  function openCartPanel() {
+    if (!headerCartToggle || !headerCartPanel) return;
+    headerCartToggle.setAttribute("aria-expanded", "true");
+    headerCartPanel.hidden = false;
+  }
+
+  function closeCartPanel() {
+    if (!headerCartToggle || !headerCartPanel) return;
+    headerCartToggle.setAttribute("aria-expanded", "false");
+    headerCartPanel.hidden = true;
+  }
+
+  function bumpCartBadge() {
+    if (!cartCountBadge) return;
+    cartCountBadge.classList.remove("bump");
+    void cartCountBadge.offsetWidth;
+    cartCountBadge.classList.add("bump");
+  }
+
+  function flashCartRow(key) {
+    if (!cartItems) return;
+    const row = Array.from(cartItems.children).find((el) => el.dataset.itemKey === key);
+    row?.classList.add("just-added");
+  }
+
+  let activeSizePicker = null;
+  let activeSizePickerButton = null;
+
+  function closeSizePicker() {
+    activeSizePicker?.remove();
+    activeSizePicker = null;
+    activeSizePickerButton = null;
+  }
+
+  function toggleSizePicker(button, card) {
+    if (activeSizePickerButton === button) {
+      closeSizePicker();
+      return;
+    }
+
+    closeSizePicker();
+
+    const title = card.querySelector("h2")?.textContent?.trim();
+    if (!title) return;
+
+    const catalogMatch = catalogProducts.find((item) => item.title === title);
+    const priceSpan = card.querySelector(".product-meta span");
+    const fallbackPrice = Number((priceSpan?.textContent || "").replace(/[^\d.]/g, "")) || 0;
+    const sizes = catalogMatch?.sizes || { "8x10": fallbackPrice };
+
+    const picker = document.createElement("div");
+    picker.className = "size-picker";
+    picker.setAttribute("role", "menu");
+    picker.setAttribute("aria-label", `Choose a size for ${title}`);
+
+    Object.entries(sizes).forEach(([sizeKey, price]) => {
+      const option = document.createElement("button");
+      option.type = "button";
+      option.className = "size-picker-option";
+      option.setAttribute("role", "menuitem");
+
+      const sizeLabel = document.createElement("span");
+      sizeLabel.textContent = sizeKey;
+      const priceLabel = document.createElement("span");
+      priceLabel.textContent = formatCurrency(price);
+      option.append(sizeLabel, priceLabel);
+
+      option.addEventListener("click", (event) => {
+        event.stopPropagation();
+        addItem(title, sizeKey, price, {});
+        closeSizePicker();
+      });
+
+      picker.appendChild(option);
+    });
+
+    document.body.appendChild(picker);
+
+    const buttonRect = button.getBoundingClientRect();
+    const pickerRect = picker.getBoundingClientRect();
+    const left = Math.max(8, Math.min(buttonRect.right - pickerRect.width, window.innerWidth - pickerRect.width - 8));
+    picker.style.top = `${buttonRect.bottom + 8}px`;
+    picker.style.left = `${left}px`;
+
+    activeSizePicker = picker;
+    activeSizePickerButton = button;
+    picker.querySelector(".size-picker-option")?.focus();
+  }
+
+  document.addEventListener("click", (event) => {
+    if (activeSizePicker && !activeSizePicker.contains(event.target) && !activeSizePickerButton?.contains(event.target)) {
+      closeSizePicker();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeSizePicker();
+    }
+  });
+
+  window.addEventListener("scroll", () => closeSizePicker(), true);
+  window.addEventListener("resize", () => closeSizePicker());
 
   function removeItem(title, size, metadata = {}) {
     const normalizedMetadata = metadata && typeof metadata === "object" ? metadata : {};
@@ -484,6 +624,7 @@
       const product = getProduct(item.title);
       const row = document.createElement("article");
       row.className = "cart-item";
+      row.dataset.itemKey = itemDomKey(item.title, item.size || "8x10", item.metadata);
       const metadataLines = [];
 
       if (item.metadata?.runTitle) {
@@ -498,20 +639,24 @@
         metadataLines.push(`Dates: ${escapeHtml(item.metadata.walkDates)}`);
       }
 
+      const safeTitle = escapeHtml(item.title);
+
       row.innerHTML = `
         <div class="cart-item-swatch ${product?.swatchClass || ""}" aria-hidden="true"></div>
         <div>
-          <h3>${item.title}</h3>
+          <h3>${safeTitle}</h3>
           <p>${item.size || "8x10"} • ${formatCurrency(item.price || 0)} each</p>
           ${metadataLines.length ? `<p class="cart-item-meta">${metadataLines.join(" • ")}</p>` : ""}
         </div>
         <div class="cart-item-controls">
-          <div class="cart-quantity" aria-label="Quantity controls for ${item.title}">
+          <div class="cart-quantity" aria-label="Quantity controls for ${safeTitle}">
             <button type="button" data-action="decrease" aria-label="Decrease quantity">−</button>
             <span>${item.quantity}</span>
             <button type="button" data-action="increase" aria-label="Increase quantity">+</button>
           </div>
-          <button type="button" class="cart-remove" data-action="remove">Remove</button>
+          <button type="button" class="cart-remove" data-action="remove" aria-label="Remove ${safeTitle} from cart">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M9 7V4h6v3"></path><path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"></path></svg>
+          </button>
         </div>
       `;
 
