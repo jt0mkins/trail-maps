@@ -1119,6 +1119,15 @@ textarea {
   min-height: 170px;
 }
 
+/* Spam trap field: kept off-screen rather than display:none, which some bots skip. */
+.contact-form .form-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .form-status {
   min-height: 1.4rem;
   margin: 0.2rem 0 0;

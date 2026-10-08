@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Tongariro Alpine Crossing | Trail Maps NZ</title>
     <meta name="description" content="View the Tongariro Alpine Crossing 3D printed trail map." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -76,7 +78,7 @@
             <form class="custom-abel-tasman-date-form" custom-abel-tasman-date-form>
               <label class="custom-gpx-field">
                 <span>Walk Dates</span>
-                <input type="text" name="run-title" data-custom-run-title placeholder="e.g. 16th - 18th February" required />
+                <input type="text" name="run-title" maxlength="100" data-custom-run-title placeholder="e.g. 16th - 18th February" required />
               </label>
             </form>
             <div class="size-selector" role="radiogroup" aria-label="Choose a print size">
@@ -85,7 +87,7 @@
               <label><input type="radio" name="size-tongariro-alpine-crossing" value="A3" /> A3</label>
             </div>
             <div class="product-detail-meta">
-              <span>NZ$149</span>
+              <span>NZ$45</span>
               <button type="button" class="button button-primary" data-cart-add>Add to cart</button>
             </div>
           </div>

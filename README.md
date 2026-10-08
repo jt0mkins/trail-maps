@@ -5,7 +5,7 @@ A responsive static website for selling 3D printed trail maps of New Zealand's G
 ## Pages
 
 - Home
-- Store with 10 featured products
+- Store with 9 featured trail maps plus a custom GPX route
 - About us
 - Contact us
 
@@ -43,6 +43,14 @@ C:/Python313/python.exe server.py
 ```
 
 Then open http://127.0.0.1:8000/ in your browser.
+
+## Security notes
+
+- Prices are set on the server (`PRICE_LIST` in `server.py`), not taken from the browser. Keep them in sync with `catalogProducts` / `customRouteSizes` in `script.js`.
+- The server only answers POSTs from its own pages. If you host it on a real domain, set `ALLOWED_HOSTS` (e.g. `ALLOWED_HOSTS=trailmapsnz.co.nz`) or checkout and contact requests will be blocked.
+- `/checkout` and `/contact` are rate limited per visitor, request bodies are size-capped, and the contact form has a hidden spam-trap field.
+- Every page has a Content-Security-Policy `<meta>` tag. If you add a script, font or image from another site, add its domain to the policy in each HTML page and in `CONTENT_SECURITY_POLICY` in `server.py`.
+- Never commit `.env`; it is listed in `.gitignore`.
 
 ## Deploy to GitHub Pages
 

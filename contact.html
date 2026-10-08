@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Contact Us | Trail Maps NZ</title>
     <meta name="description" content="Contact Trail Maps NZ for orders, custom trail maps, and wholesale enquiries." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,15 +89,20 @@
           <form class="contact-form" id="contact-form">
             <label>
               Name
-              <input type="text" name="name" placeholder="Your name" required />
+              <input type="text" name="name" placeholder="Your name" maxlength="100" autocomplete="name" required />
             </label>
             <label>
               Email
-              <input type="email" name="email" placeholder="you@example.com" required />
+              <input type="email" name="email" placeholder="you@example.com" maxlength="254" autocomplete="email" required />
             </label>
             <label>
               Message
-              <textarea name="message" rows="6" placeholder="Tell us about what you're looking for..." required></textarea>
+              <textarea name="message" rows="6" placeholder="Tell us about what you're looking for..." maxlength="5000" required></textarea>
+            </label>
+            <!-- Spam trap: hidden from people, but bots fill it in. -->
+            <label class="form-honeypot" aria-hidden="true">
+              Website
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
             </label>
             <button type="submit" class="button button-primary">Send enquiry</button>
             <p class="form-status" id="form-status" aria-live="polite"></p>
@@ -112,6 +119,7 @@
         <a href="store.html">Shop now</a>
       </div>
     </footer>
+    <script src="script.js" defer></script>
     <script src="contact.js"></script>
   </body>
 </html>

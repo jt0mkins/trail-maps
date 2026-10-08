@@ -9,6 +9,19 @@
   const header = document.querySelector(".site-header");
   const siteNav = document.querySelector(".site-header .nav");
 
+  // The success page is reached after Stripe payment, so the order is done.
+  if (document.body.hasAttribute("data-clear-cart")) {
+    try {
+      window.localStorage.removeItem(storageKey);
+    } catch {}
+  }
+
+  // The walk-date and custom route forms have no submit button; stop Enter
+  // in a text field from reloading the page.
+  document.querySelectorAll("form:not(#contact-form)").forEach((form) => {
+    form.addEventListener("submit", (event) => event.preventDefault());
+  });
+
   if (siteNav && !document.querySelector(".nav-toggle")) {
     const navToggle = document.createElement("button");
     navToggle.className = "nav-toggle";
@@ -127,17 +140,25 @@
   const itemDomKey = (title, size, metadata) => `${title}__${size}__${JSON.stringify(metadata || {})}`;
 
   const catalogProducts = [
-    { title: "Milford Track", description: "Classic fjord-to-alpine route artwork.", price: 179, swatchClass: "milford", sizes: { "8x10": 179, "A4": 209, "A3": 249 } },
-    { title: "Routeburn Track", description: "Alpine ridgelines and dramatic elevation shifts.", price: 169, swatchClass: "routeburn", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
-    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 159, swatchClass: "abel", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
-    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 149, swatchClass: "tongariro", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
-    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 169, swatchClass: "kepler", sizes: { "8x10": 169, "A4": 199, "A3": 239 } },
-    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 159, swatchClass: "heaphy", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
-    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 149, swatchClass: "rangi", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
-    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 159, swatchClass: "paparoa", sizes: { "8x10": 159, "A4": 189, "A3": 229 } },
-    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 149, swatchClass: "whanganui", sizes: { "8x10": 149, "A4": 179, "A3": 219 } },
-    { title: "Great Walks Collection Set", description: "A curated trio of trail maps.", price: 449, swatchClass: "route-alternates", sizes: { "Set (3pcs)": 449 } },
+    { title: "Milford Track", description: "Classic fjord-to-alpine route artwork.", price: 45, swatchClass: "milford", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Routeburn Track", description: "Alpine ridgelines and dramatic elevation shifts.", price: 45, swatchClass: "routeburn", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Abel Tasman Coast Track", description: "Coastal contours and beach-inspired styling.", price: 45, swatchClass: "abel", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Tongariro Alpine Crossing", description: "Volcanic terrain in a striking silhouette.", price: 45, swatchClass: "tongariro", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Kepler Track", description: "Fiordland forests, passes, and lakes.", price: 45, swatchClass: "kepler", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Heaphy Track", description: "West coast route with lush terrain styling.", price: 45, swatchClass: "heaphy", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Rakiura Track", description: "Remote island contours and a minimalist finish.", price: 45, swatchClass: "rangi", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Paparoa Track", description: "Rugged ridges and limestone country.", price: 45, swatchClass: "paparoa", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
+    { title: "Whanganui Journey", description: "River-inspired contours and a warm neutral palette.", price: 45, swatchClass: "whanganui", sizes: { "8x10": 45, "A4": 65, "A3": 85 } },
   ];
+
+  const customRouteTitle = "Custom GPX Run";
+  const customRouteSizes = { "8x10": 55, "A4": 75, "A3": 95 };
+
+  // Current price for a cart line, or null if the product/size no longer exists.
+  const lookupPrice = (title, size) => {
+    const sizes = title === customRouteTitle ? customRouteSizes : catalogProducts.find((item) => item.title === title)?.sizes;
+    return sizes && sizes[size] != null ? sizes[size] : null;
+  };
 
   const products = [
     ...Array.from(document.querySelectorAll(".product-card")).map((card) => {
@@ -276,6 +297,8 @@
 
       card.addEventListener("click", goToProductPage);
       card.addEventListener("keydown", (event) => {
+        // Only the card itself; let Enter/Space on the inner button work normally.
+        if (event.target !== card) return;
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           goToProductPage(event);
@@ -331,13 +354,33 @@
         return;
       }
 
-      const fileLabel = file ? `Uploaded file: ${file.name}` : "No file selected yet.";
-      const titleLabel = title ? `Run title: ${title}` : "Add a run title to personalise the order.";
+      // Escaped: a file name or title like "<img onerror=…>" must not become HTML.
+      const fileLabel = file ? `Uploaded file: ${escapeHtml(file.name)}` : "No file selected yet.";
+      const titleLabel = title ? `Run title: ${escapeHtml(title)}` : "Add a run title to personalise the order.";
       customGpxPreview.innerHTML = `<strong>Custom route ready</strong><br />${fileLabel}<br />${titleLabel}`;
     };
 
-    customGpxFileInput.addEventListener("change", updateCustomGpxPreview);
+    const maxGpxBytes = 10 * 1024 * 1024;
+    customGpxFileInput.addEventListener("change", () => {
+      const file = customGpxFileInput.files?.[0];
+      if (file && (!/\.gpx$/i.test(file.name) || file.size > maxGpxBytes)) {
+        window.alert("Please choose a .gpx file that is 10 MB or smaller.");
+        customGpxFileInput.value = "";
+      }
+      updateCustomGpxPreview();
+    });
     customRunTitleInput.addEventListener("input", updateCustomGpxPreview);
+
+    const customPriceSpan = document.querySelector("[data-custom-gpx-product] .product-detail-meta span");
+    const getCustomSize = () => document.querySelector("[data-custom-gpx-product] .size-selector input[type='radio']:checked")?.value || "8x10";
+    const updateCustomPrice = () => {
+      if (customPriceSpan) customPriceSpan.textContent = formatCurrency(customRouteSizes[getCustomSize()]);
+    };
+
+    document.querySelectorAll("[data-custom-gpx-product] .size-selector input[type='radio']").forEach((radio) => {
+      radio.addEventListener("change", updateCustomPrice);
+    });
+    updateCustomPrice();
 
     const customButton = document.querySelector("[data-custom-gpx-product] [data-cart-add]");
     if (customButton) {
@@ -345,14 +388,22 @@
         event.stopPropagation();
         const runTitle = customRunTitleInput.value.trim();
         const file = customGpxFileInput.files?.[0];
+        const fieldValue = (selector) => customGpxForm.querySelector(selector)?.value.trim() || "";
+        const runDistance = fieldValue("[data-custom-run-distance]");
+        const runElevation = fieldValue("[data-custom-run-elevation]");
+        const runDates = fieldValue("[data-custom-run-dates]");
 
-        if (!runTitle || !file) {
-          window.alert("Please add a run title and choose a GPX file before adding this custom map to your cart.");
+        if (!runTitle || !runDistance || !runElevation || !runDates || !file) {
+          customGpxForm.reportValidity();
           return;
         }
 
-        addItem("Custom GPX Run", "Custom", 129, {
+        const size = getCustomSize();
+        addItem(customRouteTitle, size, customRouteSizes[size], {
           runTitle,
+          runDistance,
+          runElevation,
+          runDates,
           gpxFileName: file.name,
         });
       });
@@ -384,7 +435,10 @@
     });
 
     document.addEventListener("click", (event) => {
-      if (!headerCartPanel.contains(event.target) && !headerCartToggle.contains(event.target)) {
+      // composedPath() still includes the panel when the clicked button was
+      // removed by a re-render (e.g. the quantity +/− and remove buttons).
+      const path = event.composedPath();
+      if (!path.includes(headerCartPanel) && !path.includes(headerCartToggle)) {
         closeCartPanel();
       }
     });
@@ -407,6 +461,10 @@
       .map((item) => `${item.quantity} x ${item.title} (${item.size || "8x10"})`)
       .join("\n");
 
+    const originalLabel = cartCheckout.textContent;
+    cartCheckout.disabled = true;
+    cartCheckout.textContent = "Starting checkout…";
+
     try {
       const response = await fetch("/checkout", {
         method: "POST",
@@ -418,25 +476,48 @@
         }),
       });
 
-      const data = await response.json();
+      // On a static host (e.g. GitHub Pages) there is no /checkout endpoint,
+      // so the response is a 404 page rather than JSON.
+      let data = null;
+      try {
+        data = await response.json();
+      } catch {}
 
-      if (data.checkoutUrl && data.checkoutUrl !== "#") {
+      if (!data) {
+        window.alert("Online checkout isn't available on this site yet. Please get in touch through the Contact page to place your order.");
+        return;
+      }
+
+      // Only ever redirect to Stripe's hosted checkout page.
+      if (response.ok && isStripeCheckoutUrl(data.checkoutUrl)) {
         window.location.href = data.checkoutUrl;
         return;
       }
 
-      window.alert(`Checkout is ready.\n\n${summary}\n\nSubtotal: ${formatCurrency(subtotal)}\n\n${data.message || "Stripe checkout has not been configured yet."}`);
+      window.alert(`${response.ok ? "Checkout is not available yet." : "Checkout could not be started."}\n\n${summary}\n\nSubtotal: ${formatCurrency(subtotal)}\n\n${data.message || ""}`);
     } catch (error) {
       window.alert(`Checkout could not be started. ${error.message}`);
+    } finally {
+      cartCheckout.disabled = false;
+      cartCheckout.textContent = originalLabel;
     }
   });
+
+  function isStripeCheckoutUrl(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" && url.hostname === "checkout.stripe.com";
+    } catch {
+      return false;
+    }
+  }
 
   function addItem(title, size, price, metadata = {}) {
     const normalizedMetadata = metadata && typeof metadata === "object" ? metadata : {};
     const existingItem = cart.find((item) => item.title === title && item.size === size && JSON.stringify(item.metadata || {}) === JSON.stringify(normalizedMetadata));
 
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity = Math.min(99, existingItem.quantity + 1);
       existingItem.price = price || existingItem.price || 0;
       existingItem.metadata = normalizedMetadata;
     } else {
@@ -502,9 +583,14 @@
     if (!title) return;
 
     const catalogMatch = catalogProducts.find((item) => item.title === title);
-    const priceSpan = card.querySelector(".product-meta span");
-    const fallbackPrice = Number((priceSpan?.textContent || "").replace(/[^\d.]/g, "")) || 0;
-    const sizes = catalogMatch?.sizes || { "8x10": fallbackPrice };
+    if (!catalogMatch) {
+      // Products like the custom route need details (GPX file etc.) that are
+      // only collected on their own page.
+      const productPage = card.getAttribute("data-product-page");
+      if (productPage) window.location.href = productPage;
+      return;
+    }
+    const sizes = catalogMatch.sizes;
 
     const picker = document.createElement("div");
     picker.className = "size-picker";
@@ -542,7 +628,9 @@
 
     activeSizePicker = picker;
     activeSizePickerButton = button;
-    picker.querySelector(".size-picker-option")?.focus();
+    // preventScroll: a focus-triggered scroll would fire the scroll listener
+    // below and close the picker straight away (common on phones).
+    picker.querySelector(".size-picker-option")?.focus({ preventScroll: true });
   }
 
   document.addEventListener("click", (event) => {
@@ -579,7 +667,7 @@
       return;
     }
 
-    item.quantity += delta;
+    item.quantity = Math.min(99, item.quantity + delta);
 
     if (item.quantity <= 0) {
       removeItem(title, size, normalizedMetadata);
@@ -631,6 +719,18 @@
         metadataLines.push(`Run: ${escapeHtml(item.metadata.runTitle)}`);
       }
 
+      if (item.metadata?.runDistance) {
+        metadataLines.push(`Distance: ${escapeHtml(item.metadata.runDistance)}`);
+      }
+
+      if (item.metadata?.runElevation) {
+        metadataLines.push(`Elevation: ${escapeHtml(item.metadata.runElevation)}`);
+      }
+
+      if (item.metadata?.runDates) {
+        metadataLines.push(`Date: ${escapeHtml(item.metadata.runDates)}`);
+      }
+
       if (item.metadata?.gpxFileName) {
         metadataLines.push(`GPX: ${escapeHtml(item.metadata.gpxFileName)}`);
       }
@@ -645,7 +745,7 @@
         <div class="cart-item-swatch ${product?.swatchClass || ""}" aria-hidden="true"></div>
         <div>
           <h3>${safeTitle}</h3>
-          <p>${item.size || "8x10"} • ${formatCurrency(item.price || 0)} each</p>
+          <p>${escapeHtml(item.size || "8x10")} • ${formatCurrency(item.price || 0)} each</p>
           ${metadataLines.length ? `<p class="cart-item-meta">${metadataLines.join(" • ")}</p>` : ""}
         </div>
         <div class="cart-item-controls">
@@ -669,7 +769,22 @@
   }
 
   function saveCart() {
-    window.localStorage.setItem(storageKey, JSON.stringify(cart));
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(cart));
+    } catch {}
+  }
+
+  // Keep only the order details the site collects, as short strings.
+  function cleanMetadata(metadata) {
+    if (!metadata || typeof metadata !== "object") return undefined;
+    const allowedKeys = ["walkDates", "runTitle", "runDistance", "runElevation", "runDates", "gpxFileName"];
+    const cleaned = {};
+    allowedKeys.forEach((key) => {
+      if (typeof metadata[key] === "string" && metadata[key].trim()) {
+        cleaned[key] = metadata[key].trim().slice(0, 200);
+      }
+    });
+    return Object.keys(cleaned).length ? cleaned : undefined;
   }
 
   function loadCart() {
@@ -681,15 +796,21 @@
         return [];
       }
 
+      // Re-price saved items from the current price list so old prices don't
+      // linger, and drop anything no longer sold (e.g. the collection set).
       return parsed
-        .map((item) => ({
-          title: typeof item.title === "string" ? item.title : "",
-          size: typeof item.size === "string" && item.size ? item.size : "8x10",
-          quantity: Number(item.quantity) || 0,
-          price: Number(item.price) || 0,
-          metadata: item.metadata && typeof item.metadata === "object" ? item.metadata : undefined,
-        }))
-        .filter((item) => item.title && item.quantity > 0);
+        .map((item) => {
+          const title = typeof item.title === "string" ? item.title : "";
+          const size = typeof item.size === "string" && item.size ? item.size : "8x10";
+          return {
+            title,
+            size,
+            quantity: Math.min(99, Math.floor(Number(item.quantity)) || 0),
+            price: lookupPrice(title, size),
+            metadata: cleanMetadata(item.metadata),
+          };
+        })
+        .filter((item) => item.title && item.quantity > 0 && item.price != null);
     } catch {
       return [];
     }

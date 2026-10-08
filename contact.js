@@ -27,7 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
         body: new URLSearchParams(formData),
       });
 
-      const data = await response.json();
+      // A static host (e.g. GitHub Pages) has no /contact endpoint and
+      // returns an HTML error page instead of JSON.
+      let data = null;
+      try {
+        data = await response.json();
+      } catch {}
+
+      if (!data) {
+        throw new Error("The contact form isn't available on this site yet. Please email hello@trailmapsnz.co.nz instead.");
+      }
 
       if (data.success) {
         status.textContent = data.message;
