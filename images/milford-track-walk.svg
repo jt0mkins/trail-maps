@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Milford Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b6d0b2"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="497" cy="107" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,306 80,251 120,268 160,261 200,271 240,257 280,219 320,243 360,245 400,229 440,226 480,248 520,309 560,262 600,325 640,298 680,261 720,231 760,287 800,290 800,600" fill="#3b7256" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,283 80,266 120,283 160,230 200,235 240,288 280,250 320,228 360,242 400,188 440,235 480,230 520,269 560,223 600,232 640,284 680,284 720,259 760,218 800,225 800,600" fill="#3b7256" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,443 80,415 120,387 160,355 200,345 240,371 280,405 320,404 360,416 400,394 440,421 480,407 520,400 560,392 600,376 640,350 680,336 720,356 760,334 800,342 800,600" fill="#10261e" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="300" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#10261e">Milford Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

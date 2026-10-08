@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Your Custom Route walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3c49a"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="489" cy="111" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,241 80,227 120,254 160,195 200,180 240,184 280,186 320,137 360,188 400,133 440,81 480,80 520,147 560,80 600,101 640,80 680,80 720,80 760,80 800,80 800,600" fill="#b65c2d" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,281 80,335 120,313 160,282 200,319 240,351 280,370 320,358 360,346 400,349 440,339 480,359 520,410 560,382 600,328 640,308 680,309 720,300 760,263 800,286 800,600" fill="#b65c2d" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,411 80,380 120,352 160,323 200,336 240,334 280,352 320,391 360,406 400,378 440,408 480,399 520,409 560,432 600,452 640,441 680,471 720,442 760,405 800,367 800,600" fill="#173126" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="337" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#173126">Your Custom Route</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

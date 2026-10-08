@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Tongariro Alpine Crossing walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7b46e"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="537" cy="116" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,247 80,254 120,243 160,300 200,287 240,301 280,343 320,342 360,292 400,318 440,312 480,325 520,374 560,381 600,318 640,314 680,354 720,348 760,280 800,267 800,600" fill="#8a3f2d" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,368 80,359 120,323 160,323 200,319 240,308 280,288 320,287 360,330 400,321 440,304 480,333 520,345 560,360 600,332 640,279 680,313 720,276 760,228 800,259 800,600" fill="#8a3f2d" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,371 80,369 120,359 160,356 200,336 240,376 280,336 320,326 360,305 400,273 440,255 480,260 520,260 560,293 600,301 640,307 680,316 720,346 760,344 800,325 800,600" fill="#2c1f1d" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="473" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#2c1f1d">Tongariro Alpine Crossing</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

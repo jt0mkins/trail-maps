@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Whanganui Journey walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dbc7a6"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="548" cy="139" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,208 80,215 120,149 160,168 200,211 240,151 280,219 320,282 360,225 400,273 440,252 480,275 520,308 560,321 600,390 640,338 680,383 720,366 760,307 800,349 800,600" fill="#556d75" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,342 80,344 120,368 160,370 200,411 240,459 280,458 320,506 360,536 400,524 440,536 480,530 520,527 560,526 600,510 640,527 680,486 720,515 760,540 800,560 800,600" fill="#556d75" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,427 80,447 120,451 160,439 200,413 240,399 280,424 320,415 360,446 400,444 440,474 480,507 520,535 560,560 600,547 640,512 680,505 720,505 760,481 800,490 800,600" fill="#21303a" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="337" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#21303a">Whanganui Journey</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

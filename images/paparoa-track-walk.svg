@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Paparoa Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c2b28a"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="648" cy="112" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,191 80,243 120,282 160,316 200,308 240,240 280,281 320,241 360,265 400,227 440,239 480,270 520,285 560,248 600,315 640,370 680,383 720,427 760,417 800,480 800,600" fill="#6a4e3d" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,345 80,292 120,274 160,221 200,169 240,137 280,95 320,97 360,91 400,111 440,80 480,80 520,120 560,81 600,80 640,107 680,80 720,80 760,80 800,132 800,600" fill="#6a4e3d" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,427 80,429 120,451 160,433 200,422 240,435 280,470 320,483 360,485 400,450 440,416 480,381 520,349 560,322 600,355 640,344 680,322 720,339 760,346 800,360 800,600" fill="#33281f" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="300" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#33281f">Paparoa Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

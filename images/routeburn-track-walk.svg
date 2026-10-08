@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Routeburn Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0d0a5"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="525" cy="97" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,220 80,290 120,325 160,338 200,285 240,272 280,233 320,180 360,208 400,145 440,80 480,117 520,111 560,80 600,145 640,195 680,234 720,187 760,217 800,191 800,600" fill="#486c8b" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,363 80,411 120,358 160,387 200,345 240,389 280,389 320,345 360,347 400,365 440,354 480,384 520,437 560,455 600,504 640,467 680,463 720,430 760,387 800,411 800,600" fill="#486c8b" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,424 80,435 120,449 160,466 200,504 240,498 280,532 320,521 360,507 400,470 440,455 480,439 520,411 560,416 600,387 640,377 680,412 720,448 760,485 800,465 800,600" fill="#172d48" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="303" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#172d48">Routeburn Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>
