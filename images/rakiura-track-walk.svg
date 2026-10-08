@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Rakiura Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cad8c0"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="594" cy="100" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,329 80,391 120,337 160,271 200,331 240,271 280,224 320,233 360,213 400,221 440,267 480,222 520,264 560,273 600,322 640,355 680,383 720,361 760,297 800,240 800,600" fill="#2f6776" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,347 80,390 120,395 160,415 200,405 240,354 280,330 320,359 360,347 400,317 440,292 480,249 520,281 560,234 600,256 640,282 680,330 720,378 760,406 800,459 800,600" fill="#2f6776" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,378 80,367 120,354 160,372 200,398 240,370 280,378 320,339 360,318 400,286 440,312 480,317 520,291 560,319 600,332 640,343 680,319 720,285 760,273 800,301 800,600" fill="#072735" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="300" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#072735">Rakiura Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

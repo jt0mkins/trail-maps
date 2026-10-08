@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Abel Tasman Coast Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3e1b6"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="614" cy="134" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,289 80,303 120,338 160,379 200,405 240,466 280,495 320,466 360,457 400,462 440,470 480,466 520,489 560,440 600,429 640,470 680,422 720,458 760,498 800,524 800,600" fill="#68a8a0" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,363 80,331 120,299 160,324 200,280 240,267 280,284 320,236 360,213 400,178 440,123 480,121 520,80 560,80 600,88 640,80 680,80 720,82 760,80 800,94 800,600" fill="#68a8a0" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,392 80,370 120,383 160,383 200,382 240,380 280,361 320,351 360,351 400,322 440,290 480,262 520,265 560,283 600,259 640,228 680,194 720,232 760,209 800,210 800,600" fill="#004e56" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="439" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#004e56">Abel Tasman Coast Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>

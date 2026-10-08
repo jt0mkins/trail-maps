@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Kepler Track walk photo placeholder">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b9d0af"/>
+      <stop offset="1" stop-color="#fff8ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="691" cy="125" r="46" fill="#fff8ee" fill-opacity="0.85"/>
+  <polygon points="0,600 0,260 40,291 80,285 120,342 160,326 200,313 240,372 280,407 320,392 360,330 400,337 440,332 480,360 520,385 560,397 600,340 640,341 680,376 720,314 760,298 800,272 800,600" fill="#54785f" fill-opacity="0.55"/>
+  <polygon points="0,600 0,330 40,331 80,366 120,313 160,286 200,245 240,216 280,202 320,189 360,192 400,211 440,190 480,164 520,179 560,162 600,115 640,135 680,165 720,158 760,110 800,145 800,600" fill="#54785f" fill-opacity="0.85"/>
+  <polygon points="0,600 0,410 40,389 80,402 120,411 160,450 200,436 240,422 280,390 320,415 360,398 400,438 440,417 480,436 520,405 560,382 600,355 640,353 680,343 720,332 760,334 800,353 800,600" fill="#173126" fill-opacity="1"/>
+  <path d="M 120 600 C 260 520, 520 560, 470 470 S 600 420, 700 430" fill="none" stroke="#f3e1b6" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18" stroke-opacity="0.9"/>
+  <g font-family="Georgia, 'Times New Roman', serif">
+    <rect x="32" y="488" width="300" height="80" rx="16" fill="#fff8ee" fill-opacity="0.92"/>
+    <text x="56" y="534" font-size="28" font-weight="700" fill="#173126">Kepler Track</text>
+    <text x="56" y="558" font-size="16" font-family="Arial, Helvetica, sans-serif" fill="#5b665f">Walk photo · placeholder image</text>
+  </g>
+</svg>
