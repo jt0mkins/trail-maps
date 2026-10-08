@@ -548,6 +548,46 @@ textarea {
   border-bottom: 1px solid rgba(23, 49, 38, 0.05);
 }
 
+.conservation-banner {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 1.4rem;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.conservation-figure {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(3.5rem, 9vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.conservation-banner h2 {
+  margin: 0 0 0.6rem;
+  font-family: "Fraunces", serif;
+}
+
+.conservation-banner p:last-child {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .conservation-banner {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1.4rem;
+  }
+}
+
 .split-layout {
   grid-template-columns: 0.95fr 1.05fr;
   align-items: center;
